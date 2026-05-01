@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Памятка прокурора — Majestic RP</title>
+    <title>Памятка — Majestic RP New York</title>
     <style>
         :root {
             --bg-primary: #0a0a0a;
@@ -1116,15 +1116,177 @@
             z-index: 100;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
+
+        /* DONATION */
+        .donate-box {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gold-border);
+            border-radius: 8px;
+            padding: 20px 24px;
+            text-align: center;
+            margin: 32px 0 16px;
+        }
+
+        .donate-box .donate-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+        }
+
+        .donate-box .donate-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .donate-box .donate-number {
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+        }
+
+        /* INTRO OVERLAY */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0a0a0a;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: introFadeOut 0.8s ease 3.2s forwards;
+            pointer-events: none;
+        }
+
+        .intro-emblem {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: var(--accent-gold);
+            animation: introPulse 1s ease-in-out;
+            margin-bottom: 32px;
+        }
+
+        .intro-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            color: var(--accent-gold);
+            opacity: 0;
+            animation: introReveal 0.8s ease 0.6s forwards;
+        }
+
+        .intro-subtitle {
+            font-size: 11px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-top: 12px;
+            opacity: 0;
+            animation: introReveal 0.8s ease 1.2s forwards;
+        }
+
+        .intro-line {
+            width: 60px;
+            height: 1px;
+            background: var(--accent-gold-border);
+            margin-top: 20px;
+            opacity: 0;
+            animation: introReveal 0.6s ease 1.8s forwards;
+        }
+
+        .intro-credit {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 16px;
+            opacity: 0;
+            animation: introReveal 0.6s ease 2.2s forwards;
+        }
+
+        .intro-credit strong {
+            color: var(--accent-light);
+        }
+
+        .intro-server {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            opacity: 0;
+            animation: introReveal 0.6s ease 2.5s forwards;
+        }
+
+        @keyframes introPulse {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes introReveal {
+            0% { opacity: 0; transform: translateY(8px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes introFadeOut {
+            0% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        /* RESPONSIVE FIX */
+        @media (max-width: 900px) {
+            .role-toggle {
+                margin-left: 8px;
+            }
+            .role-btn {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+            .header-search input {
+                width: 140px;
+            }
+            .header-search input:focus {
+                width: 180px;
+            }
+            .header-badge {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+
+<!-- INTRO OVERLAY -->
+<div class="intro-overlay" id="introOverlay">
+    <div class="intro-emblem">&#9878;</div>
+    <div class="intro-title">Government</div>
+    <div class="intro-subtitle">Majestic RP &bull; New York</div>
+    <div class="intro-line"></div>
+    <div class="intro-credit">Created by <strong>Egor Mortez</strong></div>
+    <div class="intro-server">Памятка для сервера New York</div>
+</div>
 
 <!-- HEADER -->
 <header class="header">
     <div class="header-emblem">&#9878;</div>
     <div class="header-title">Памятка <span class="header-role-text">прокурора</span></div>
-    <div class="header-subtitle">Majestic RP &#8212; Штат Сан-Андреас</div>
+    <div class="header-subtitle">Majestic RP &#8212; New York</div>
     <div class="role-toggle" id="roleToggle">
         <button class="role-btn active" data-role="prosecutor">Прокурор</button>
         <button class="role-btn" data-role="lawyer">Адвокат</button>
@@ -1276,7 +1438,7 @@
 <div class="page-title">
     <h1 class="prosecutor-only">Памятка <strong>прокурора</strong></h1>
     <h1 class="lawyer-only">Памятка <strong>адвоката</strong></h1>
-    <div class="desc prosecutor-only">Подробное руководство по законодательству штата Сан-Андреас для сотрудников Офиса Генерального Прокурора &#8226; Majestic RP</div>
+    <div class="desc prosecutor-only">Подробное руководство по законодательству штата New York для сотрудников Офиса Генерального Прокурора &#8226; Majestic RP</div>
     <div class="desc lawyer-only">Практическое руководство по защите прав доверителей и взаимодействию с госорганами &#8226; Majestic RP</div>
 </div>
 
@@ -2827,15 +2989,54 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-    Составлено на основе: Уголовно-Административного кодекса, Процессуального кодекса, Гражданского кодекса и Закона о деятельности Офиса Генерального Прокурора штата Сан-Андреас<br>
-    Majestic RP — Department of Justice — 2026
+    <div>Составлено на основе: Уголовно-Административного кодекса, Процессуального кодекса, Гражданского кодекса и Закона о деятельности Офиса Генерального Прокурора штата New York</div>
+    <div style="margin-top:6px;color:var(--text-muted);font-size:10px;">Majestic RP &#8212; New York &#8212; 2026 &#8212; Created by Egor Mortez</div>
+    <div class="donate-box" style="max-width:400px;margin:24px auto 0;">
+        <div class="donate-label">&#9733; Поддержать проект &#9733;</div>
+        <div class="donate-text">Если памятка была полезна, можете поддержать переводом</div>
+        <div class="donate-number">325164</div>
+    </div>
 </footer>
 
 <script>
+    // INTRO OVERLAY REMOVAL
+    const introOverlay = document.getElementById('introOverlay');
+    if (introOverlay) {
+        setTimeout(() => {
+            if (introOverlay.parentNode) {
+                introOverlay.parentNode.removeChild(introOverlay);
+            }
+        }, 4200);
+    }
+
     // ROLE TOGGLE
     const roleToggle = document.getElementById('roleToggle');
     const roleBtns = roleToggle.querySelectorAll('.role-btn');
     const headerRoleText = document.querySelector('.header-role-text');
+    let currentObserver = null;
+
+    function initObserver() {
+        if (currentObserver) currentObserver.disconnect();
+        const visibleSections = Array.from(document.querySelectorAll('.section')).filter(el => {
+            if (el.classList.contains('lawyer-only') && document.body.classList.contains('lawyer-mode')) return true;
+            if (el.classList.contains('lawyer-only') || el.classList.contains('prosecutor-only')) {
+                if (el.classList.contains('prosecutor-only') && document.body.classList.contains('lawyer-mode')) return false;
+                if (el.classList.contains('lawyer-only') && !document.body.classList.contains('lawyer-mode')) return false;
+            }
+            return !el.classList.contains('lawyer-only') && !el.classList.contains('prosecutor-only');
+        });
+        currentObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.sidebar-link').forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-80px 0px -70% 0px' });
+        visibleSections.forEach(s => currentObserver.observe(s));
+    }
 
     roleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2850,9 +3051,12 @@
                 headerRoleText.textContent = 'прокурора';
             }
             clearSearch();
+            initObserver();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
+
+    initObserver();
 
     // SIDEBAR COLLAPSIBLE GROUPS
     document.querySelectorAll('.sidebar-group-toggle').forEach(toggle => {
@@ -2886,25 +3090,8 @@
         });
     }
 
-    // Sidebar active link tracking
-    const sections = document.querySelectorAll('.section');
-    const links = document.querySelectorAll('.sidebar-link');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                links.forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-                });
-            }
-        });
-    }, { rootMargin: '-80px 0px -70% 0px' });
-
-    sections.forEach(section => observer.observe(section));
-
     // Smooth scroll for sidebar links
-    links.forEach(link => {
+    document.querySelectorAll('.sidebar-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const target = document.querySelector(link.getAttribute('href'));
@@ -2927,7 +3114,6 @@
     let highlights = [];
     let currentIndex = -1;
 
-    // Ctrl+K to focus search
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
@@ -2938,32 +3124,21 @@
             clearSearch();
             searchInput.blur();
         }
-        if (highlights.length > 0) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                if (e.shiftKey) {
-                    navigateSearch(-1);
-                } else {
-                    navigateSearch(1);
-                }
-            }
+        if (highlights.length > 0 && e.key === 'Enter') {
+            e.preventDefault();
+            navigateSearch(e.shiftKey ? -1 : 1);
         }
     });
 
     let debounceTimer;
     searchInput.addEventListener('input', () => {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-            performSearch(searchInput.value);
-        }, 150);
+        debounceTimer = setTimeout(() => performSearch(searchInput.value), 150);
     });
 
     searchPrev.addEventListener('click', () => navigateSearch(-1));
     searchNext.addEventListener('click', () => navigateSearch(1));
-    searchClose.addEventListener('click', () => {
-        clearSearch();
-        searchInput.blur();
-    });
+    searchClose.addEventListener('click', () => { clearSearch(); searchInput.blur(); });
 
     function clearSearch() {
         clearHighlights();
@@ -2977,8 +3152,7 @@
     }
 
     function clearHighlights() {
-        const marks = content.querySelectorAll('mark.search-highlight, mark.search-current');
-        marks.forEach(mark => {
+        content.querySelectorAll('mark.search-highlight, mark.search-current').forEach(mark => {
             const parent = mark.parentNode;
             parent.replaceChild(document.createTextNode(mark.textContent), mark);
             parent.normalize();
@@ -2992,6 +3166,15 @@
 
     function escapeRegex(str) {
         return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function getVisibleSections() {
+        const isLawyer = document.body.classList.contains('lawyer-mode');
+        return Array.from(content.querySelectorAll('.section, details, .card, .scenario, .alert, .miranda, .page-title')).filter(el => {
+            if (el.classList.contains('lawyer-only') && !isLawyer) return false;
+            if (el.classList.contains('prosecutor-only') && isLawyer) return false;
+            return true;
+        });
     }
 
     function performSearch(query) {
@@ -3009,30 +3192,22 @@
 
         const term = query.trim().toLowerCase();
         const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');
-
-        const searchables = content.querySelectorAll('.section:not(.lawyer-only):not(.prosecutor-only), .section.lawyer-only, .section.prosecutor-only, details, .card, .scenario, .alert, .miranda, .page-title');
+        const searchables = getVisibleSections();
         let hasAny = false;
 
-        const visibleSearchables = Array.from(searchables).filter(el => {
-            if (el.classList.contains('lawyer-only') && !document.body.classList.contains('lawyer-mode')) return false;
-            if (el.classList.contains('prosecutor-only') && document.body.classList.contains('lawyer-mode')) return false;
-            return true;
-        });
-
-        visibleSearchables.forEach(el => {
-            const text = el.textContent.toLowerCase();
-            if (text.includes(term)) hasAny = true;
+        searchables.forEach(el => {
+            if (el.textContent.toLowerCase().includes(term)) hasAny = true;
         });
 
         if (!hasAny) {
             searchNav.classList.remove('visible');
             headerSearch.classList.remove('has-results');
             searchCount.textContent = '0 / 0';
-            visibleSearchables.forEach(el => el.classList.add('search-dim'));
+            searchables.forEach(el => el.classList.add('search-dim'));
             return;
         }
 
-        visibleSearchables.forEach(el => {
+        searchables.forEach(el => {
             if (!el.textContent.toLowerCase().includes(term)) {
                 el.classList.add('search-dim');
             } else {
@@ -3048,10 +3223,9 @@
         if (highlights.length > 0) {
             currentIndex = 0;
             updateCurrentHighlight();
+            updateCount();
             searchNav.classList.add('visible');
             headerSearch.classList.add('has-results');
-            updateCount();
-
             highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
@@ -3069,18 +3243,14 @@
         });
 
         const textNodes = [];
-        while (walker.nextNode()) {
-            textNodes.push(walker.currentNode);
-        }
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
 
         textNodes.forEach(node => {
             const span = document.createElement('span');
             span.innerHTML = node.textContent.replace(regex, '<mark class="search-highlight">$1</mark>');
             node.parentNode.replaceChild(span, node);
 
-            span.querySelectorAll('mark.search-highlight').forEach(mark => {
-                highlights.push(mark);
-            });
+            span.querySelectorAll('mark.search-highlight').forEach(mark => highlights.push(mark));
 
             while (span.childNodes.length > 0) {
                 span.parentNode.insertBefore(span.childNodes[0], span);
@@ -3091,17 +3261,12 @@
 
     function navigateSearch(direction) {
         if (highlights.length === 0) return;
-
         currentIndex = (currentIndex + direction + highlights.length) % highlights.length;
         updateCurrentHighlight();
         updateCount();
-
         highlights[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-
         const parentDetails = highlights[currentIndex].closest('details');
-        if (parentDetails && !parentDetails.open) {
-            parentDetails.open = true;
-        }
+        if (parentDetails && !parentDetails.open) parentDetails.open = true;
     }
 
     function updateCurrentHighlight() {
