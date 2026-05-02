@@ -1,0 +1,3119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Памятка прокурора — Majestic RP</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-hover: #1e1e1e;
+            --bg-input: #1a1a1a;
+            --accent-primary: #8a8a8a;
+            --accent-secondary: #666666;
+            --accent-light: #b0b0b0;
+            --accent-gold: #c9a84c;
+            --accent-gold-dim: #a68a3e;
+            --accent-gold-bg: rgba(201, 168, 76, 0.08);
+            --accent-gold-border: rgba(201, 168, 76, 0.2);
+            --accent-red: #c44040;
+            --accent-red-bg: rgba(196, 64, 64, 0.1);
+            --accent-green: #4caf50;
+            --accent-green-bg: rgba(76, 175, 80, 0.1);
+            --accent-blue: #4a90d9;
+            --accent-blue-bg: rgba(74, 144, 217, 0.1);
+            --text-primary: #e0e0e0;
+            --text-secondary: #999999;
+            --text-muted: #666666;
+            --border-color: #222222;
+            --border-light: #2a2a2a;
+            --sidebar-width: 280px;
+            --header-height: 56px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #333 #0a0a0a;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+        /* HEADER */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-emblem {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-left: 16px;
+            padding-left: 16px;
+            border-left: 1px solid var(--border-color);
+            letter-spacing: 0.3px;
+        }
+
+        .header-badge {
+            margin-left: auto;
+            background: var(--accent-gold-bg);
+            border: 1px solid var(--accent-gold-border);
+            color: var(--accent-gold);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* SEARCH BAR */
+        .header-search {
+            margin-left: auto;
+            position: relative;
+            margin-right: 16px;
+        }
+
+        .header-search input {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 12px 6px 34px;
+            color: var(--text-primary);
+            font-size: 13px;
+            width: 280px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .header-search input:focus {
+            border-color: var(--accent-gold-border);
+            background: var(--bg-card);
+            width: 340px;
+        }
+
+        .header-search input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .header-search .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .header-search .search-kbd {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            padding: 1px 6px;
+            font-size: 10px;
+            color: var(--text-muted);
+            font-family: inherit;
+        }
+
+        .header-search.has-results .search-kbd {
+            display: none;
+        }
+
+        .search-nav {
+            display: none;
+            align-items: center;
+            gap: 4px;
+            margin-left: 8px;
+        }
+
+        .search-nav.visible {
+            display: flex;
+        }
+
+        .search-nav button {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.15s;
+        }
+
+        .search-nav button:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .search-count {
+            font-size: 11px;
+            color: var(--text-muted);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .search-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            transition: all 0.15s;
+        }
+
+        .search-close:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        /* SEARCH HIGHLIGHTS */
+        mark.search-highlight {
+            background: rgba(201, 168, 76, 0.3);
+            color: var(--accent-gold);
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        mark.search-current {
+            background: rgba(201, 168, 76, 0.6);
+            color: #fff;
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        .search-dim {
+            opacity: 0.15;
+            transition: opacity 0.2s;
+        }
+
+        .search-section-match {
+            opacity: 1 !important;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            z-index: 900;
+            padding: 16px 0;
+        }
+
+        .sidebar-section {
+            padding: 0 16px;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-section-title {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 0 6px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 7px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12.5px;
+            border-radius: 6px;
+            transition: all 0.15s;
+            gap: 8px;
+        }
+
+        .sidebar-link:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-link.active {
+            background: var(--accent-gold-bg);
+            color: var(--accent-gold);
+        }
+
+        .sidebar-link .num {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            min-width: 22px;
+        }
+
+        .sidebar-link.active .num {
+            color: var(--accent-gold-dim);
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 12px 16px;
+        }
+
+        /* MAIN CONTENT */
+        .main {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 40px 80px;
+        }
+
+        /* PAGE TITLE */
+        .page-title {
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .page-title h1 strong {
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .page-title .desc {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* SECTIONS */
+        .section {
+            margin-bottom: 48px;
+            scroll-margin-top: calc(var(--header-height) + 20px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-num {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            background: var(--accent-gold-bg);
+            border: 1px solid var(--accent-gold-border);
+            padding: 3px 10px;
+            border-radius: 3px;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* SUBSECTION */
+        .subsection {
+            margin-bottom: 24px;
+        }
+
+        .subsection h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-light);
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 2px solid var(--accent-gold-border);
+        }
+
+        .subsection p, .subsection ul, .subsection ol {
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .subsection ul, .subsection ol {
+            padding-left: 20px;
+        }
+
+        .subsection li {
+            margin-bottom: 4px;
+        }
+
+        /* TABLES */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 12px 0 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-card);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+        }
+
+        thead th {
+            background: var(--bg-hover);
+            color: var(--accent-light);
+            font-weight: 600;
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        tbody td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            vertical-align: top;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        tbody td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        /* STAR BADGES */
+        .star {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .star-1 { background: rgba(76,175,80,0.15); color: #4caf50; }
+        .star-2 { background: rgba(76,175,80,0.2); color: #66bb6a; }
+        .star-3 { background: rgba(255,193,7,0.15); color: #ffc107; }
+        .star-4 { background: rgba(255,152,0,0.15); color: #ff9800; }
+        .star-5 { background: rgba(196,64,64,0.15); color: #c44040; }
+
+        /* JURISDICTION BADGES */
+        .jur {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .jur-f { background: var(--accent-blue-bg); color: var(--accent-blue); }
+        .jur-r { background: var(--accent-green-bg); color: var(--accent-green); }
+        .jur-fr { background: rgba(156,39,176,0.12); color: #ce93d8; }
+        .jur-fin { background: var(--accent-gold-bg); color: var(--accent-gold); }
+        .jur-mil { background: rgba(121,85,72,0.15); color: #a1887f; }
+
+        /* CHECKBOX LIST */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 6px 0 6px 24px;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid var(--border-light);
+            border-radius: 3px;
+        }
+
+        /* NUMBERED STEPS */
+        .steps {
+            list-style: none;
+            padding: 0;
+            counter-reset: step;
+        }
+
+        .steps li {
+            counter-increment: step;
+            padding: 8px 0 8px 36px;
+            position: relative;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-gold-bg);
+            border: 1px solid var(--accent-gold-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        /* ALERT BOXES */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 12px 0 16px;
+            font-size: 13px;
+            border-left: 3px solid;
+        }
+
+        .alert-gold {
+            background: var(--accent-gold-bg);
+            border-color: var(--accent-gold);
+            color: var(--accent-light);
+        }
+
+        .alert-red {
+            background: var(--accent-red-bg);
+            border-color: var(--accent-red);
+            color: #e08080;
+        }
+
+        .alert-green {
+            background: var(--accent-green-bg);
+            border-color: var(--accent-green);
+            color: #81c784;
+        }
+
+        .alert-blue {
+            background: var(--accent-blue-bg);
+            border-color: var(--accent-blue);
+            color: #90b8e0;
+        }
+
+        .alert strong {
+            color: var(--text-primary);
+        }
+
+        .alert-title {
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+        }
+
+        /* QUICK REF CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 16px 0 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .card-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .card-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .card-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* SCENARIO BOX */
+        .scenario {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 12px 0 16px;
+            overflow: hidden;
+        }
+
+        .scenario-header {
+            background: var(--bg-hover);
+            padding: 10px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .scenario-body {
+            padding: 14px 16px;
+        }
+
+        .scenario-body ol, .scenario-body ul {
+            padding-left: 18px;
+        }
+
+        .scenario-body li {
+            color: var(--text-secondary);
+            font-size: 12.5px;
+            margin-bottom: 4px;
+            line-height: 1.6;
+        }
+
+        /* MIRANDA BOX */
+        .miranda {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gold-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0 24px;
+            text-align: center;
+        }
+
+        .miranda-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .miranda-text {
+            font-size: 14px;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        /* HIGHLIGHT */
+        strong { color: var(--text-primary); }
+        em { color: var(--text-secondary); font-style: italic; }
+
+        /* INLINE CODE */
+        code {
+            background: var(--bg-hover);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: var(--accent-gold);
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 24px 40px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 11px;
+            margin-left: var(--sidebar-width);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; }
+            .content { padding: 24px 20px 60px; }
+            .footer { margin-left: 0; }
+            .cards { grid-template-columns: repeat(2, 1fr); }
+            .header-subtitle { display: none; }
+        }
+
+        /* PRINT */
+        @media print {
+            .sidebar, .header { display: none; }
+            .main { margin: 0; }
+            body { background: #fff; color: #000; }
+            .section { page-break-inside: avoid; }
+        }
+
+        /* CHAPTER GROUP TABS */
+        .chapter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chapter-tab {
+            padding: 6px 14px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+        }
+
+        .chapter-tab:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .chapter-tab.active {
+            background: var(--accent-gold-bg);
+            border-color: var(--accent-gold-border);
+            color: var(--accent-gold);
+        }
+
+        /* COLLAPSIBLE */
+        details {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        details[open] {
+            border-color: var(--border-light);
+        }
+
+        summary {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-light);
+            user-select: none;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::before {
+            content: '+';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background: var(--bg-hover);
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+            transition: all 0.15s;
+            flex-shrink: 0;
+        }
+
+        details[open] summary::before {
+            content: '-';
+        }
+
+        details .detail-body {
+            padding: 0 16px 14px;
+        }
+
+        /* Hierarchy tree */
+        .tree {
+            padding: 0;
+            list-style: none;
+            margin: 12px 0;
+        }
+
+        .tree li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .tree li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 14px;
+            height: 1px;
+            background: var(--border-light);
+        }
+
+        .tree li::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -6px;
+            bottom: 8px;
+            width: 1px;
+            background: var(--border-color);
+        }
+
+        .tree li:last-child::after {
+            display: none;
+        }
+
+        .tree li strong {
+            color: var(--text-primary);
+        }
+
+        /* Arrow indicator */
+        .arrow-flow {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+
+        .arrow-flow .step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .arrow-flow .step.gold {
+            border-color: var(--accent-gold-border);
+            background: var(--accent-gold-bg);
+            color: var(--accent-gold);
+        }
+
+        .arrow-flow .arrow {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ROLE TOGGLE */
+        .role-toggle {
+            display: flex;
+            margin-left: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .role-btn {
+            padding: 5px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .role-btn:hover {
+            color: var(--text-secondary);
+        }
+
+        .role-btn.active {
+            background: var(--accent-gold-bg);
+            color: var(--accent-gold);
+        }
+
+        .role-btn + .role-btn {
+            border-left: 1px solid var(--border-color);
+        }
+
+        /* BACK TO TOP */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            z-index: 800;
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--bg-hover);
+            color: var(--accent-gold);
+            border-color: var(--accent-gold-border);
+        }
+
+        /* SIDEBAR COLLAPSIBLE */
+        .sidebar-group {
+            padding: 0 16px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-group-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 7px 12px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: color 0.15s;
+        }
+
+        .sidebar-group-toggle:hover {
+            color: var(--text-secondary);
+        }
+
+        .sidebar-group-toggle .toggle-arrow {
+            transition: transform 0.15s;
+            font-size: 10px;
+        }
+
+        .sidebar-group.collapsed .toggle-arrow {
+            transform: rotate(-90deg);
+        }
+
+        .sidebar-group-links {
+            overflow: hidden;
+            max-height: 600px;
+            transition: max-height 0.25s ease;
+        }
+
+        .sidebar-group.collapsed .sidebar-group-links {
+            max-height: 0;
+        }
+
+        /* LAWYER SECTION */
+        .lawyer-only {
+            display: none;
+        }
+
+        body.lawyer-mode .lawyer-only {
+            display: block;
+        }
+
+        body.lawyer-mode .prosecutor-only {
+            display: none;
+        }
+
+        body.lawyer-mode .lawyer-only-flex {
+            display: flex;
+        }
+
+        .lawyer-only-flex {
+            display: none;
+        }
+
+        /* COPY BUTTON */
+        .copy-block {
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 10px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-gold-bg);
+            color: var(--accent-gold);
+            border-color: var(--accent-gold-border);
+        }
+
+        .copy-btn.copied {
+            background: var(--accent-green-bg);
+            color: var(--accent-green);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .copy-text {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px 16px;
+            font-size: 12.5px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin: 12px 0;
+            white-space: pre-wrap;
+        }
+
+        /* Q&A TABLE */
+        .qa-table thead th:first-child {
+            width: 40px;
+        }
+
+        .qa-table thead th:nth-child(2) {
+            min-width: 250px;
+        }
+
+        .answer-correct {
+            color: var(--accent-green);
+        }
+
+        .answer-wrong {
+            color: var(--accent-red);
+        }
+
+        /* TOOLTIP */
+        .tip {
+            display: inline-block;
+            position: relative;
+            cursor: help;
+            border-bottom: 1px dotted var(--text-muted);
+            color: var(--text-secondary);
+        }
+
+        .tip:hover::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 11px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-emblem">&#9878;</div>
+    <div class="header-title">Памятка <span class="header-role-text">прокурора</span></div>
+    <div class="header-subtitle">Majestic RP &#8212; Штат Сан-Андреас</div>
+    <div class="role-toggle" id="roleToggle">
+        <button class="role-btn active" data-role="prosecutor">Прокурор</button>
+        <button class="role-btn" data-role="lawyer">Адвокат</button>
+    </div>
+    <div class="header-search" id="headerSearch">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="searchInput" placeholder="Поиск по памятке..." autocomplete="off" spellcheck="false">
+        <span class="search-kbd">Ctrl+K</span>
+        <div class="search-nav" id="searchNav">
+            <button id="searchPrev" title="Предыдущий">&#9650;</button>
+            <span class="search-count" id="searchCount">0 / 0</span>
+            <button id="searchNext" title="Следующий">&#9660;</button>
+            <button class="search-close" id="searchClose" title="Закрыть">&#10005;</button>
+        </div>
+    </div>
+    <div class="header-badge">Department of Justice</div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+    <!-- Prosecutor Nav -->
+    <div class="prosecutor-only">
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Общее <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#quick" class="sidebar-link active"><span class="num">00</span> Быстрый справочник</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Процедуры <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#powers" class="sidebar-link"><span class="num">I</span> Полномочия прокурора</a>
+                <a href="#detention" class="sidebar-link"><span class="num">II</span> Процедура задержания</a>
+                <a href="#evidence" class="sidebar-link"><span class="num">III</span> Доказательства</a>
+                <a href="#warrants" class="sidebar-link"><span class="num">IV</span> Ордера</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Уголовный кодекс <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#ch6" class="sidebar-link"><span class="num">VI</span> Жизнь и здоровье</a>
+                <a href="#ch7" class="sidebar-link"><span class="num">VII</span> Свобода и честь</a>
+                <a href="#ch8" class="sidebar-link"><span class="num">VIII</span> Половая неприкосн.</a>
+                <a href="#ch9" class="sidebar-link"><span class="num">IX</span> Конституц. права</a>
+                <a href="#ch10" class="sidebar-link"><span class="num">X</span> Собственность</a>
+                <a href="#ch11" class="sidebar-link"><span class="num">XI</span> Экономика</a>
+                <a href="#ch12" class="sidebar-link"><span class="num">XII</span> Общ. безопасность</a>
+                <a href="#ch13" class="sidebar-link"><span class="num">XIII</span> Здоровье населения</a>
+                <a href="#ch14" class="sidebar-link"><span class="num">XIV</span> Конституц. строй</a>
+                <a href="#ch15" class="sidebar-link"><span class="num">XV</span> Власть</a>
+                <a href="#ch16" class="sidebar-link"><span class="num">XVI</span> Правосудие</a>
+                <a href="#ch17" class="sidebar-link"><span class="num">XVII</span> Управление</a>
+                <a href="#ch18" class="sidebar-link"><span class="num">XVIII</span> Военная служба</a>
+                <a href="#ch19" class="sidebar-link"><span class="num">XIX</span> Окружающая среда</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Административный <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#admin" class="sidebar-link"><span class="num">XX</span> Все правонарушения</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Дополнительно <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#statute" class="sidebar-link"><span class="num">&#8212;</span> Сроки давности</a>
+                <a href="#investigation" class="sidebar-link"><span class="num">&#8212;</span> Допрос и следствия</a>
+                <a href="#court" class="sidebar-link"><span class="num">&#8212;</span> Судебные процедуры</a>
+                <a href="#wanted" class="sidebar-link"><span class="num">&#8212;</span> Розыск и залог</a>
+                <a href="#circumstances" class="sidebar-link"><span class="num">&#8212;</span> Обстоятельства</a>
+                <a href="#force" class="sidebar-link"><span class="num">&#8212;</span> Стадии силы</a>
+                <a href="#scenarios" class="sidebar-link"><span class="num">&#8212;</span> Сценарии</a>
+                <a href="#civil" class="sidebar-link"><span class="num">&#8212;</span> Гражданский кодекс</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lawyer Nav -->
+    <div class="lawyer-only">
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Общее <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#lawyer-quick" class="sidebar-link active"><span class="num">00</span> Быстрый справочник</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Задержание <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#lawyer-subjects" class="sidebar-link"><span class="num">I</span> Субъекты задержания</a>
+                <a href="#lawyer-grounds" class="sidebar-link"><span class="num">II</span> Основания</a>
+                <a href="#lawyer-order" class="sidebar-link"><span class="num">III</span> Порядок (ПК 3.3)</a>
+                <a href="#lawyer-release" class="sidebar-link"><span class="num">IV</span> Освобождение</a>
+                <a href="#lawyer-conf" class="sidebar-link"><span class="num">V</span> Конф. беседа</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Права адвоката <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#lawyer-rights" class="sidebar-link"><span class="num">VI</span> Права и свободы</a>
+                <a href="#lawyer-duties" class="sidebar-link"><span class="num">VII</span> Обязанности</a>
+                <a href="#lawyer-bans" class="sidebar-link"><span class="num">VIII</span> Запреты</a>
+                <a href="#lawyer-status" class="sidebar-link"><span class="num">IX</span> Гос. vs Частный</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Аргументация <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#lawyer-objections" class="sidebar-link"><span class="num">X</span> Возражения госнику</a>
+                <a href="#lawyer-articles" class="sidebar-link"><span class="num">XI</span> Статьи исключения</a>
+                <a href="#lawyer-monologue" class="sidebar-link"><span class="num">XII</span> Монолог</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Допрос госника <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#lawyer-qa" class="sidebar-link"><span class="num">XIII</span> Вопросы и ответы</a>
+                <a href="#lawyer-qa-rules" class="sidebar-link"><span class="num">XIV</span> Правила вопросов</a>
+            </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-group">
+            <button class="sidebar-group-toggle">Кодексы <span class="toggle-arrow">&#9662;</span></button>
+            <div class="sidebar-group-links">
+                <a href="#ch6" class="sidebar-link"><span class="num">VI</span> Жизнь и здоровье</a>
+                <a href="#ch7" class="sidebar-link"><span class="num">VII</span> Свобода и честь</a>
+                <a href="#ch10" class="sidebar-link"><span class="num">X</span> Собственность</a>
+                <a href="#ch12" class="sidebar-link"><span class="num">XII</span> Общ. безопасность</a>
+                <a href="#ch16" class="sidebar-link"><span class="num">XVI</span> Правосудие</a>
+                <a href="#ch17" class="sidebar-link"><span class="num">XVII</span> Управление</a>
+                <a href="#admin" class="sidebar-link"><span class="num">XX</span> Административный</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+<div class="content">
+
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h1 class="prosecutor-only">Памятка <strong>прокурора</strong></h1>
+    <h1 class="lawyer-only">Памятка <strong>адвоката</strong></h1>
+    <div class="desc prosecutor-only">Подробное руководство по законодательству штата Сан-Андреас для сотрудников Офиса Генерального Прокурора &#8226; Majestic RP</div>
+    <div class="desc lawyer-only">Практическое руководство по защите прав доверителей и взаимодействию с госорганами &#8226; Majestic RP</div>
+</div>
+
+<!-- SECTION: QUICK REF -->
+<div class="section" id="quick">
+    <div class="section-header">
+        <span class="section-num">00</span>
+        <span class="section-title">Быстрый справочник</span>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-label">Срок задержания</div>
+            <div class="card-value">1 час</div>
+            <div class="card-desc">Максимальный срок</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Срок давности</div>
+            <div class="card-value">25 дн.</div>
+            <div class="card-desc">Общий срок</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Мин. залог</div>
+            <div class="card-value">$25K</div>
+            <div class="card-desc">+ $25K за каждую ★</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Допрос</div>
+            <div class="card-value">1 час</div>
+            <div class="card-desc">Макс. длительность</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Решение прокурора</div>
+            <div class="card-value">1 сутки</div>
+            <div class="card-desc">До 3 суток при сложности</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Звонок адвоката</div>
+            <div class="card-value">3 мин</div>
+            <div class="card-desc">Только частному адвокату</div>
+        </div>
+    </div>
+
+    <!-- Hierarchy -->
+    <div class="subsection">
+        <h3>Иерархия ОГП</h3>
+        <div class="arrow-flow">
+            <span class="step">Помощник</span><span class="arrow">→</span>
+            <span class="step">Прокурор</span><span class="arrow">→</span>
+            <span class="step">Прокурор-референт</span><span class="arrow">→</span>
+            <span class="step">Зам. Генпрокурора</span><span class="arrow">→</span>
+            <span class="step gold">Генеральный прокурор</span>
+        </div>
+    </div>
+
+    <!-- Miranda -->
+    <div class="miranda">
+        <div class="miranda-label">Правило Миранды — заучить наизусть</div>
+        <div class="miranda-text">«Вы имеете право хранить молчание. Всё, что вы скажете, может и будет использовано против Вас в суде. Вы имеете право на один телефонный звонок. Также Вы имеете право на адвоката, частного и государственного. Вы понимаете свои права?»</div>
+    </div>
+
+    <!-- Warrant Auth -->
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Должность</th><th>Авторизация ордеров</th></tr></thead>
+            <tbody>
+                <tr><td>Генпрокурор / Заместители</td><td>✅ Все типы ордеров</td></tr>
+                <tr><td>Прокурор-референт</td><td>✅ Только <strong>AI</strong> и <strong>AS</strong></td></tr>
+                <tr><td>Прокурор и ниже</td><td>❌ Не могут авторизовать</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Freeze Times -->
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Ситуация</th><th>Заморозка</th><th>Основание</th></tr></thead>
+            <tbody>
+                <tr><td>Ожидание ответа адвоката</td><td><strong>+3 мин</strong></td><td>ПК ст. 3.3 ч.4</td></tr>
+                <tr><td>Ожидание прибытия адвоката</td><td><strong>+8 мин</strong></td><td>ПК ст. 3.3 ч.4</td></tr>
+                <tr><td>Вызов руководства + прокурора (госслужащий)</td><td><strong>до 9–15 мин</strong></td><td>ПК ст. 3.5 ч.1</td></tr>
+                <tr><td>Просмотр видеофиксации невиновности</td><td><strong>до 10 мин</strong></td><td>ПК ст. 3.6 ч.2</td></tr>
+                <tr><td>Допрос, экспертиза, обыск</td><td><strong>Приостанавливается</strong></td><td>ПК ст. 3.6 ч.2</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- SECTION I: POWERS -->
+<div class="section" id="powers">
+    <div class="section-header">
+        <span class="section-num">I</span>
+        <span class="section-title">Полномочия прокурора</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Надзор и контроль (ст. 10)</h3>
+        <ul>
+            <li>Надзор за исполнением законов <strong>всеми</strong> органами власти и организациями</li>
+            <li>Надзор за соблюдением прав и свобод человека</li>
+            <li>Надзор за органами ОРД, следствия и процессуальных действий</li>
+            <li>Координация правоохранительных органов по борьбе с преступностью</li>
+            <li>Возбуждение уголовных и административных дел, проведение расследования</li>
+        </ul>
+    </div>
+
+    <div class="subsection">
+        <h3>Следственные полномочия (ст. 21–24, 31, 36)</h3>
+        <ul>
+            <li><strong>Беспрепятственно входить</strong> на территории любых госорганизаций (ст. 21)</li>
+            <li>Доступ к информации, <strong>включая ограниченную</strong>, персональные данные</li>
+            <li>Требовать документы, справки, медицинские заключения</li>
+            <li>Вызывать граждан и должностных лиц для допроса</li>
+            <li>Проводить <strong>любые</strong> следственные действия по Процессуальному кодексу</li>
+            <li>Привлекать правоохранительные органы для оперативной деятельности</li>
+            <li>Фото-, видео-, аудиозапись <strong>везде</strong>, включая запрещённые зоны (ст. 32)</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-red">
+        <div class="alert-title">⚠ Важное ограничение</div>
+        <strong>НЕДОПУСТИМО</strong> использование наручников и спецсредств прокурором (ПК ст. 10.1 ч.6)
+    </div>
+
+    <div class="subsection">
+        <h3>Особые полномочия Генпрокурора (ст. 20)</h3>
+        <ul>
+            <li>Приостанавливать или отменять любые нормативные акты, противоречащие Конституции</li>
+            <li>Освобождать незаконно задержанных, снимать незаконные судимости</li>
+            <li>Восстанавливать незаконно уволенных в должности</li>
+            <li>Вносить сотрудников в <strong>чёрный список</strong> (только за тяжкое/особо тяжкое)</li>
+            <li>Предоставлять FIB доступ на закрытые территории</li>
+            <li>Открывать/закрывать юрисдикцию между правоохранительными органами</li>
+        </ul>
+    </div>
+
+    <div class="subsection">
+        <h3>Обязанности прокурора (ст. 38)</h3>
+        <ul>
+            <li>Надзор за единообразным применением законов</li>
+            <li>Выступать <strong>государственным обвинителем</strong> в суде</li>
+            <li>Авторизация ордеров</li>
+            <li>Делопроизводство, архивирование, закрытие расследований</li>
+            <li>Своевременная передача материалов дела в суды</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION II: DETENTION -->
+<div class="section" id="detention">
+    <div class="section-header">
+        <span class="section-num">II</span>
+        <span class="section-title">Процедура задержания</span>
+    </div>
+
+    <div class="alert alert-blue">
+        <strong>Задержание</strong> — мера кратковременного (<strong>до 1 часа</strong>) лишения свободы. Не считается мерой наказания, носит исключительно внесудебный характер.
+    </div>
+
+    <div class="subsection">
+        <h3>Основания задержания (ПК ст. 3.2 ч.2)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>№</th><th>Основание</th><th>Примечание</th></tr></thead>
+                <tbody>
+                    <tr><td>а</td><td>Лицо застигнуто в момент правонарушения</td><td>Государственным служащим</td></tr>
+                    <tr><td>б</td><td>Обнаружены явные следы на лице/одежде/в жилище</td><td>—</td></tr>
+                    <tr><td>в</td><td><strong>3+ свидетелей</strong> указывают на лицо</td><td><strong>НЕ могут:</strong> родственники, знакомые, коллеги</td></tr>
+                    <tr><td>г</td><td>Фото или видео фиксация правонарушения</td><td>—</td></tr>
+                    <tr><td>д</td><td>Ордер на задержание</td><td>—</td></tr>
+                    <tr><td>е</td><td>Требование Губернатора / Генпрокурора</td><td>—</td></tr>
+                    <tr><td>ж</td><td>Ориентировка на ТС или лицо</td><td>—</td></tr>
+                    <tr><td>з</td><td>Лицо находится в розыске</td><td>—</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Порядок задержания (ПК ст. 3.3)</h3>
+        <ol class="steps">
+            <li>Надеть <strong>наручники</strong> на подозреваемого</li>
+            <li>Предъявить <strong>удостоверение</strong> / жетон / бейдж</li>
+            <li>Первичный обыск <em>(на усмотрение)</em></li>
+            <li>Разъяснить квалификацию и <strong>зачитать правило Миранды</strong></li>
+            <li>Идентификация, проверка по базе розыска, проверка принадлежности к госорганам</li>
+            <li>Доставить в участок / департамент шерифа / штаб-квартиру FIB</li>
+            <li>Реализовать права задержанного</li>
+            <li>Следственные действия <em>(допрос, экспертиза)</em></li>
+        </ol>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Задержание госслужащего (ПК ст. 3.5)</div>
+        <div class="scenario-body">
+            <ol>
+                <li>Вызвать <strong>руководство задержанного</strong> + <strong>сотрудника ОГП</strong></li>
+                <li>Заморозить срок: до <strong>9 мин</strong> (ожидание), до <strong>15 мин</strong> (при ответе прокурора)</li>
+                <li>По прибытии прокурора — представить доказательства</li>
+                <li>Прокурор оценивает правомерность → если нет состава → <strong>освобождение</strong></li>
+                <li>Лишение свободы → работодатель <strong>обязан уволить</strong></li>
+                <li>Штраф → увольнение на <strong>усмотрение</strong> работодателя или ОГП</li>
+                <li>Если прокурор не может прибыть → <strong>освобождение</strong>, обращение в ОГП за 1 час</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Права задержанного</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Право</th><th>Описание</th></tr></thead>
+                <tbody>
+                    <tr><td>Телефонный звонок</td><td>1 звонок до <strong>3 мин</strong> — только частному адвокату</td></tr>
+                    <tr><td>Адвокат</td><td>Частный или государственный</td></tr>
+                    <tr><td>Молчание</td><td>Право не давать показаний</td></tr>
+                    <tr><td>Ходатайства</td><td>Возбуждать ходатайства, заявлять отводы</td></tr>
+                    <tr><td>Конфиденциальная встреча</td><td>С адвокатом, до <strong>10 минут</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="alert alert-gold">
+        <div class="alert-title">Примечание о телефонном звонке</div>
+        Звонок предназначен <strong>исключительно</strong> для связи с частным адвокатом по действительному договору в приложении «Адвокаты». Запрос для иных целей — <strong>основание для отказа</strong>.
+    </div>
+</div>
+
+<!-- SECTION III: EVIDENCE -->
+<div class="section" id="evidence">
+    <div class="section-header">
+        <span class="section-num">III</span>
+        <span class="section-title">Доказательства</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Допустимые доказательства (ПК ст. 2.1)</h3>
+        <ol>
+            <li>Показания подозреваемого, обвиняемого</li>
+            <li>Показания потерпевшего, свидетеля</li>
+            <li>Заключение и показания эксперта / специалиста</li>
+            <li>Вещественные доказательства</li>
+            <li>Протоколы следственных и судебных действий</li>
+            <li>Иные документы</li>
+            <li><strong>Автоматически выданная запись в базе данных</strong></li>
+        </ol>
+    </div>
+
+    <div class="subsection">
+        <h3>Недопустимые доказательства (ПК ст. 2.2)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Вид</th><th>Описание</th></tr></thead>
+                <tbody>
+                    <tr><td>До прав Миранды</td><td>Любая информация <strong>ДО зачтения прав</strong>, даже с видеозаписью</td></tr>
+                    <tr><td>Предположения и слухи</td><td>На догадке, слухе, без указания источника</td></tr>
+                    <tr><td>Незаконно добытые</td><td>Изъятие без ордера, у неприкосновенного без решения суда</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="alert alert-gold">
+        <div class="alert-title">Исключение — запись в БД</div>
+        Автоматически выданная запись в базе данных <strong>в полном объёме доказывает вину</strong> разыскиваемого. Обвиняемому необходимо <strong>доказать свою невиновность</strong>. (ПК ст. 1.6 примечание, ст. 1.7 исключение)
+    </div>
+
+    <div class="subsection">
+        <h3>Критерии оценки доказательств</h3>
+        <div class="arrow-flow">
+            <span class="step gold">Относимость</span>
+            <span class="arrow">→</span>
+            <span class="step gold">Допустимость</span>
+            <span class="arrow">→</span>
+            <span class="step gold">Достоверность</span>
+            <span class="arrow">→</span>
+            <span class="step gold">Достаточность</span>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION IV: WARRANTS -->
+<div class="section" id="warrants">
+    <div class="section-header">
+        <span class="section-num">IV</span>
+        <span class="section-title">Ордера</span>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Тип</th><th>Название</th><th>Назначение</th></tr></thead>
+            <tbody>
+                <tr><td><strong>AI</strong></td><td>Access to Investigation</td><td>Доступ к расследованию</td></tr>
+                <tr><td><strong>AS</strong></td><td>Arrest and Search</td><td>Арест и обыск</td></tr>
+                <tr><td>Рейд</td><td>—</td><td>Рейд на территорию</td></tr>
+                <tr><td>Задержание</td><td>—</td><td>Задержание лица</td></tr>
+                <tr><td>Обыск</td><td>—</td><td>Обыск жилища / транспорта</td></tr>
+                <tr><td>Арест</td><td>—</td><td>Заключение под стражу</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Должность</th><th>AI</th><th>AS</th><th>Рейд</th><th>Задержание</th><th>Обыск</th><th>Арест</th></tr></thead>
+            <tbody>
+                <tr><td>Генпрокурор</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+                <tr><td>Заместитель ГП</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+                <tr><td>Прокурор-референт</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+                <tr><td>Прокурор</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-red">
+        <strong>Обыск жилища:</strong> по согласию проживающих ИЛИ на основании судебного акта / ордера ГП. Экстренный случай — без ордера, но уведомить прокурора <strong>не позднее 1 часа</strong>.
+    </div>
+
+    <div class="alert alert-gold">
+        <strong>Тайна переписки</strong> — ограничение только на основании <strong>судебного акта</strong> (ПК ст. 1.5).
+    </div>
+</div>
+
+<!-- SECTION V: CRIMINAL CODE -->
+<div class="section" id="criminal-code">
+    <div class="section-header">
+        <span class="section-num">V</span>
+        <span class="section-title">Уголовный кодекс — полный справочник</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Система розыска</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>★</th><th>Категория</th><th>Макс. наказание</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="star star-1">★</span></td><td>Небольшой тяжести</td><td>До 1 года</td></tr>
+                    <tr><td><span class="star star-2">★★</span></td><td>Небольшой тяжести</td><td>До 2 лет</td></tr>
+                    <tr><td><span class="star star-3">★★★</span></td><td>Средней тяжести</td><td>До 3 лет</td></tr>
+                    <tr><td><span class="star star-4">★★★★</span></td><td>Средней тяжести</td><td>До 4 лет</td></tr>
+                    <tr><td><span class="star star-5">★★★★★</span></td><td>Тяжкое / особо тяжкое</td><td>Свыше 4 лет</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Chapter VI -->
+    <details open>
+        <summary>Глава VI — Преступления против жизни и здоровья</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>6.1 ч.1</td><td><span class="star star-3">★★★</span></td><td>Побои, лёгкие/средние телесные повреждения</td><td>3 года</td></tr>
+                        <tr><td>6.1 ч.2</td><td><span class="star star-4">★★★★</span></td><td>Особо тяжкие телесные повреждения</td><td>4 года</td></tr>
+                        <tr><td>6.1 ч.3</td><td><span class="star star-3">★★★</span></td><td>Особо тяжкие по неосторожности / аффекту</td><td>3 года</td></tr>
+                        <tr><td>6.2 ч.1</td><td><span class="star star-4">★★★★</span></td><td>Убийство — умышленное причинение смерти</td><td>4 года</td></tr>
+                        <tr><td>6.2 ч.2</td><td><span class="star star-3">★★★</span></td><td>Причинение смерти по неосторожности / аффекту</td><td>3 года</td></tr>
+                        <tr><td>6.3</td><td><span class="star star-5">★★★★★</span></td><td>Тяжкое убийство: 2+ лиц, особая жестокость, группой, по найму</td><td>5 лет</td></tr>
+                        <tr><td>6.6</td><td><span class="star star-3">★★★</span></td><td>Угроза убийством / тяжким вредом</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>6.7</td><td><span class="star star-3">★★★</span></td><td>Воспрепятствование медработнику</td><td>3 года или штраф до $20.000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter VII -->
+    <details>
+        <summary>Глава VII — Преступления против свободы, чести и достоинства</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>7.1</td><td><span class="star star-5">★★★★★</span></td><td>Похищение человека — захват, перемещение, удержание</td><td>5 лет</td></tr>
+                        <tr><td>7.1.1</td><td><span class="star star-4">★★★★</span></td><td>Незаконное лишение свободы</td><td>4 года</td></tr>
+                        <tr><td>7.2</td><td><span class="star star-4">★★★★</span></td><td>Использование рабского труда</td><td>4 года</td></tr>
+                        <tr><td>7.3</td><td><span class="star star-4">★★★★</span></td><td>Купля-продажа людей</td><td>4 года</td></tr>
+                        <tr><td>7.4</td><td><span class="star star-2">★★/★★★</span></td><td>Клевета — распространение ложных сведений</td><td>2–3 года или штраф до $20.000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter VIII -->
+    <details>
+        <summary>Глава VIII — Преступления против половой неприкосновенности</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>8.1</td><td><span class="star star-4">★★★★</span></td><td>Изнасилование — с насилием, угрозой, использованием беспомощного состояния</td><td>4 года</td></tr>
+                        <tr><td>8.2</td><td><span class="star star-3">★★★</span></td><td>Понуждение к действиям сексуального характера</td><td>3 года</td></tr>
+                        <tr><td>8.3</td><td><span class="star star-3">★★★</span></td><td>Сексуальное домогательство</td><td>3 года</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter IX -->
+    <details>
+        <summary>Глава IX — Преступления против конституционных прав</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>9.1</td><td><span class="star star-5">★★★★★</span></td><td>Воспрепятствование избирательным правам</td><td>5 лет</td></tr>
+                        <tr><td>9.2</td><td><span class="star star-3">★★★</span></td><td>Воспрепятствование деятельности Сената</td><td>3 года или штраф $20.000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter X -->
+    <details>
+        <summary>Глава X — Преступления против собственности</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>10</td><td><span class="star star-1">★</span></td><td>Мелкое хищение (<strong>&lt;$15.000</strong>)</td><td>1 год или штраф $20.000</td></tr>
+                        <tr><td>10.1</td><td><span class="star star-3">★★★</span></td><td>Кража (<strong>&gt;$15.000</strong>)</td><td>3 года</td></tr>
+                        <tr><td>10.1.1</td><td><span class="star star-4">★★★★</span></td><td>Кража со взломом</td><td>4 года</td></tr>
+                        <tr><td>10.2</td><td><span class="star star-3">★★★</span></td><td>Мошенничество</td><td>3 года</td></tr>
+                        <tr><td>10.2.1</td><td><span class="star star-3">★★★</span></td><td>Вымогательство</td><td>3 года</td></tr>
+                        <tr><td>10.3</td><td><span class="star star-3">★★★</span></td><td>Грабёж</td><td>3 года</td></tr>
+                        <tr><td>10.4</td><td><span class="star star-4">★★★★</span></td><td>Разбой</td><td>4 года</td></tr>
+                        <tr><td>10.5</td><td><span class="star star-3">★★★</span></td><td>Угон ТС</td><td>3 года</td></tr>
+                        <tr><td>10.5.1</td><td><span class="star star-3">★★★</span></td><td>Завладение гос. ТС</td><td>3 года</td></tr>
+                        <tr><td>10.6–10.8</td><td><span class="star star-3">★★★</span></td><td>Уничтожение чужого / гос. имущества</td><td>3 года</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XI -->
+    <details>
+        <summary>Глава XI — Преступления в сфере экономической деятельности</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>11.1</td><td><span class="star star-3">★★★</span></td><td>Предпринимательство без регистрации</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>11.2</td><td><span class="star star-3">★★★</span></td><td>Принуждение к сделке</td><td>3 года</td></tr>
+                        <tr><td>11.3</td><td><span class="star star-5">★★★★★</span></td><td>Уклонение от уплаты налогов</td><td>Взыскание x2 + 5 лет</td></tr>
+                        <tr><td>11.4</td><td><span class="star star-3">★★★</span></td><td>Сокрытие средств от налогов</td><td>3 года или взыскание x2</td></tr>
+                        <tr><td>11.5</td><td><span class="star star-4">★★★★</span></td><td>Ограничение конкуренции</td><td>4 года</td></tr>
+                        <tr><td>11.6</td><td><span class="star star-5">★★★★★</span></td><td>Фин. махинации с госбюджетом</td><td>5 лет</td></tr>
+                        <tr><td>11.7</td><td><span class="star star-5">★★★★★</span></td><td>Финансирование экстремизма</td><td>5 лет</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XII -->
+    <details>
+        <summary>Глава XII — Преступления против общественной безопасности</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>12.1</td><td><span class="star star-5">★★★★★</span></td><td>Терроризм</td><td>5 лет</td></tr>
+                        <tr><td>12.1.1</td><td><span class="star star-5">★★★★★</span></td><td>Призывы к терроризму, пропаганда</td><td>5 лет</td></tr>
+                        <tr><td>12.1.2</td><td><span class="star star-5">★★★★★</span></td><td>Вербовка в террористический акт</td><td>5 лет</td></tr>
+                        <tr><td>12.2</td><td><span class="star star-3">★★★</span></td><td>Несообщение о преступлении</td><td>3 года</td></tr>
+                        <tr><td>12.3</td><td><span class="star star-4">★★★★</span></td><td>Ложное сообщение о теракте</td><td>4 года</td></tr>
+                        <tr><td>12.4</td><td><span class="star star-5">★★★★★</span></td><td>Экстремизм</td><td>5 лет</td></tr>
+                        <tr><td>12.5</td><td><span class="star star-5">★★★★★</span></td><td>Экстремистская организация</td><td>5 лет</td></tr>
+                        <tr><td>12.6</td><td><span class="star star-3">★★★</span></td><td>Нарушение порядка митингов</td><td>3 года</td></tr>
+                        <tr><td>12.6.1</td><td><span class="star star-5">★★★★★</span></td><td>Массовые беспорядки</td><td>5 лет</td></tr>
+                        <tr><td>12.7 ч.1</td><td><span class="star star-3">★★★</span></td><td>Проникновение на закрытую территорию</td><td>3 года</td></tr>
+                        <tr><td>12.7 ч.2</td><td><span class="star star-4">★★★★</span></td><td>Проникновение на объект особой важности</td><td>4–5 лет</td></tr>
+                        <tr><td>12.7 ч.3</td><td><span class="star star-5">★★★★★</span></td><td>То же должностным лицом</td><td>5 лет</td></tr>
+                        <tr><td>12.8</td><td><span class="star star-4">★★★★</span></td><td>Незаконный оборот оружия</td><td>4 года или штраф до $20.000</td></tr>
+                        <tr><td>12.8.1</td><td><span class="star star-5">★★★★★</span></td><td>Гос. спецсредства у гражданских</td><td>5 лет</td></tr>
+                        <tr><td>12.9</td><td><span class="star star-5">★★★★★</span></td><td>ВВ / ВУ</td><td>5 лет</td></tr>
+                        <tr><td>12.10</td><td><span class="star star-4">★★★★</span></td><td>Хищение оружия</td><td>4 года</td></tr>
+                        <tr><td>12.10.1</td><td><span class="star star-5">★★★★★</span></td><td>Хищение оружия сотрудниками из склада улик</td><td>5 лет</td></tr>
+                        <tr><td>12.11</td><td><span class="star star-5">★★★★★</span></td><td>Вооружённое формирование</td><td>5 лет</td></tr>
+                        <tr><td>12.12</td><td><span class="star star-5">★★★★★</span></td><td>Преступное сообщество</td><td>5 лет</td></tr>
+                        <tr><td>12.13</td><td><span class="star star-5">★★★★★</span></td><td>Получение гостайны</td><td>5 лет</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XIII -->
+    <details>
+        <summary>Глава XIII — Преступления против здоровья населения</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>13.1</td><td><span class="star star-3">★★★</span></td><td>Кустарное производство наркотиков</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>13.2</td><td><span class="star star-4">★★★★</span></td><td>Наркотики от <strong>3 грамм</strong></td><td>4 года или штраф до $20.000</td></tr>
+                        <tr><td>13.2.1</td><td><span class="star star-5">★★★★★</span></td><td>Наркотики свыше <strong>25 грамм</strong> / сбыт</td><td>5 лет</td></tr>
+                        <tr><td>13.3</td><td><span class="star star-3">★★★</span></td><td>Организация проституции</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>13.4</td><td><span class="star star-5">★★★★★</span></td><td>Наркотики сотрудниками госструктур</td><td>5 лет</td></tr>
+                        <tr><td>13.6</td><td><span class="star star-3">★★★/★★★★</span></td><td>Перевозка с поддельными документами</td><td>3–4 года или штраф до $20.000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XIV -->
+    <details>
+        <summary>Глава XIV — Преступления против основ конституционного строя</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>14.1</td><td><span class="star star-5">★★★★★</span></td><td>Дискредитация госорганов</td><td>5 лет</td></tr>
+                        <tr><td>14.2</td><td><span class="star star-5">★★★★★</span></td><td>Захват / удержание власти, мятеж</td><td>5 лет</td></tr>
+                        <tr><td>14.2.1</td><td><span class="star star-5">★★★★★</span></td><td>Сепаратизм</td><td>5 лет</td></tr>
+                        <tr><td>14.3</td><td><span class="star star-4">★★★★</span></td><td>Разглашение гостайны</td><td>4 года</td></tr>
+                        <tr><td>14.3.1</td><td><span class="star star-4">★★★★</span></td><td>Незаконное получение гостайны</td><td>4 года</td></tr>
+                        <tr><td>14.3.2</td><td><span class="star star-4">★★★★</span></td><td>Утрата документов с гостайной</td><td>4 года</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XV -->
+    <details>
+        <summary>Глава XV — Преступления против власти</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>15.1</td><td><span class="star star-4">★★★★/★★★★★</span></td><td>Превышение должностных полномочий</td><td>4–5 лет</td></tr>
+                        <tr><td>15.1.1</td><td><span class="star star-5">★★★★★</span></td><td>Злоупотребление полномочиями</td><td>5 лет</td></tr>
+                        <tr><td>15.2</td><td><span class="star star-4">★★★★</span></td><td>Неисполнение приказа / актов</td><td>4 года или штраф до $20.000</td></tr>
+                        <tr><td>15.3</td><td><span class="star star-3">★★★/★★★★</span></td><td>Присвоение полномочий</td><td>3–5 лет</td></tr>
+                        <tr><td>15.4</td><td><span class="star star-5">★★★★★</span></td><td>Получение взятки</td><td>5 лет</td></tr>
+                        <tr><td>15.5</td><td><span class="star star-5">★★★★★</span></td><td>Дача взятки</td><td>5 лет</td></tr>
+                        <tr><td>15.5.1</td><td><span class="star star-5">★★★★★</span></td><td>Посредничество во взяточничестве</td><td>5 лет</td></tr>
+                        <tr><td>15.6</td><td><span class="star star-4">★★★★/★★★★★</span></td><td>Халатность</td><td>4–5 лет</td></tr>
+                        <tr><td>15.7</td><td><span class="star star-3">★★★</span></td><td>Деструктивное поведение</td><td>3 года или штраф до $20.000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XVI -->
+    <details>
+        <summary>Глава XVI — Преступления против правосудия</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>16.1</td><td><span class="star star-4">★★★★</span></td><td>Вмешательство в правосудие</td><td>4 года</td></tr>
+                        <tr><td>16.1.1</td><td><span class="star star-4">★★★★</span></td><td>Вмешательство в деятельность защитника</td><td>4 года или штраф</td></tr>
+                        <tr><td>16.2</td><td><span class="star star-5">★★★★★</span></td><td>Посягательство на жизнь судьи / прокурора</td><td>5 лет</td></tr>
+                        <tr><td>16.3</td><td><span class="star star-5">★★★★★</span></td><td>Привлечение заведомо невиновного</td><td>5 лет</td></tr>
+                        <tr><td>16.4</td><td><span class="star star-5">★★★★★</span></td><td>Заведомо незаконное задержание</td><td>5 лет</td></tr>
+                        <tr><td>16.5</td><td><span class="star star-5">★★★★★</span></td><td>Фальсификация доказательств (гражд./админ.)</td><td>5 лет</td></tr>
+                        <tr><td>16.6</td><td><span class="star star-5">★★★★★</span></td><td>Фальсификация доказательств (уголовн.)</td><td>5 лет</td></tr>
+                        <tr><td>16.7</td><td><span class="star star-5">★★★★★</span></td><td>Заведомо неправомерный приговор</td><td>5 лет</td></tr>
+                        <tr><td>16.8</td><td><span class="star star-4">★★★★</span></td><td>Ложные показания свидетеля</td><td>4 года</td></tr>
+                        <tr><td>16.9</td><td><span class="star star-4">★★★★</span></td><td>Подкуп свидетеля</td><td>4 года</td></tr>
+                        <tr><td>16.10</td><td><span class="star star-4">★★★★/★★★★★</span></td><td>Неисполнение постановления / ордера</td><td>4–5 лет</td></tr>
+                        <tr><td>16.11</td><td><span class="star star-4">★★★★</span></td><td>Сокрытие / уничтожение улик</td><td>4 года</td></tr>
+                        <tr><td>16.12</td><td><span class="star star-4">★★★★</span></td><td>Уклонение от расследования / суда</td><td>4 года</td></tr>
+                        <tr><td>16.13</td><td><span class="star star-3">★★★</span></td><td>Ложные показания прокурору</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>16.14</td><td><span class="star star-1">★</span></td><td>Отказ от дачи показаний</td><td>10 суток или штраф до $20.000</td></tr>
+                        <tr><td>16.15</td><td><span class="star star-1">★–★★★★★</span></td><td>Уклонение от отбывания наказания</td><td>10–19 суток или 2–5 лет</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XVII -->
+    <details>
+        <summary>Глава XVII — Преступления против управления</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>17.1</td><td><span class="star star-5">★★★★★</span></td><td>Посягательство на жизнь сотрудника ПОО</td><td>5 лет</td></tr>
+                        <tr><td>17.2</td><td><span class="star star-3">★★★</span></td><td>Насилие (не опасное) против сотрудника ПОО</td><td>3 года</td></tr>
+                        <tr><td>17.3</td><td><span class="star star-3">★★★</span></td><td>Оскорбление представителя власти</td><td>3 года или штраф $20.000</td></tr>
+                        <tr><td>17.4</td><td><span class="star star-3">★★★</span></td><td>Провокация гос. служащего</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>17.5</td><td><span class="star star-3">★★★</span></td><td>Самоуправство</td><td>3 года</td></tr>
+                        <tr><td>17.6</td><td><span class="star star-3">★★★</span></td><td>Неповиновение законному требованию</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>17.7</td><td><span class="star star-3">★★★</span></td><td>Отказ от оплаты штрафа</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>17.8</td><td><span class="star star-4">★★★★</span></td><td>Подделка удостоверения / лицензии</td><td>4 года</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XVIII -->
+    <details>
+        <summary>Глава XVIII — Преступления против военной службы</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>18.1</td><td><span class="star star-3">★★★</span></td><td>Неисполнение приказа</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>18.2</td><td><span class="star star-3">★★★</span></td><td>Самовольное оставление части</td><td>3 года или штраф до $20.000</td></tr>
+                        <tr><td>18.3</td><td><span class="star star-4">★★★★</span></td><td>Дезертирство</td><td>4 года или штраф до $20.000</td></tr>
+                        <tr><td>18.4</td><td><span class="star star-3">★★★</span></td><td>Нарушение правил боевого дежурства</td><td>3 года или штраф $20.000</td></tr>
+                        <tr><td>18.5</td><td><span class="star star-3">★★★</span></td><td>Уничтожение оружия / техники</td><td>3 года</td></tr>
+                        <tr><td>18.5.1</td><td><span class="star star-4">★★★★</span></td><td>То же по неосторожности с тяжкими последствиями</td><td>4 года</td></tr>
+                        <tr><td>18.6</td><td><span class="star star-4">★★★★</span></td><td>Нарушение правил вождения боевой техники</td><td>4 года</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- Chapter XIX -->
+    <details>
+        <summary>Глава XIX — Преступления против окружающей среды</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>19.1</td><td><span class="star star-3">★★★</span></td><td>Браконьерство</td><td>3 года</td></tr>
+                        <tr><td>19.2</td><td><span class="star star-2">★★/★★★</span></td><td>Жестокое обращение с животными</td><td>2–3 года или штраф до $20.000</td></tr>
+                        <tr><td>19.3</td><td><span class="star star-2">★★/★★★</span></td><td>Изнасилование животного</td><td>2–3 года</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+</div>
+
+<!-- SECTION: ADMINISTRATIVE -->
+<div class="section" id="admin">
+    <div class="section-header">
+        <span class="section-num">XX</span>
+        <span class="section-title">Административные правонарушения</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Общественный порядок (Глава XX)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Статья</th><th>Описание</th><th>Наказание</th></tr></thead>
+                <tbody>
+                    <tr><td>20.1</td><td>Мелкое хулиганство</td><td>$3.000–$7.000 (повторно: $5.000–$10.000)</td></tr>
+                    <tr><td>20.2</td><td>Транспорт внутри госучреждений</td><td>$20.000</td></tr>
+                    <tr><td>20.3</td><td>Нахождение в неприемлемом виде / опьянение</td><td>$5.000–$20.000</td></tr>
+                    <tr><td>20.4</td><td>Обнажение оружия в неположенном месте</td><td>$15.000–$30.000 + конфискация</td></tr>
+                    <tr><td>20.5</td><td>Холодное оружие в людном месте</td><td>$20.000</td></tr>
+                    <tr><td>20.7</td><td>Безрассудное вождение</td><td>$20.000–$30.000 + лишение лицензии</td></tr>
+                    <tr><td>20.8</td><td>Ложный вызов спецслужб</td><td>$10.000–$20.000</td></tr>
+                    <tr><td>20.9</td><td>Неуважение к Сенату</td><td>$15.000–$20.000</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Права граждан, рыболовство, здоровье (Главы XXI–XXIII)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Статья</th><th>Описание</th><th>Наказание</th></tr></thead>
+                <tbody>
+                    <tr><td>21.1</td><td>Дискриминация</td><td>$10.000–$20.000</td></tr>
+                    <tr><td>21.1.1</td><td>Дискриминация в сфере труда</td><td>$150.000 работодателю</td></tr>
+                    <tr><td>21.2</td><td>Курение в общественных местах</td><td>$5.000</td></tr>
+                    <tr><td>21.3</td><td>Повреждение чужого имущества</td><td>$15.000 + возмещение</td></tr>
+                    <tr><td>21.6</td><td>Воспрепятствование журналистам</td><td>$20.000</td></tr>
+                    <tr><td>22.1–22.2</td><td>Браконьерство / превышение нормы вылова</td><td>$5.000–$20.000 + изъятие</td></tr>
+                    <tr><td>23.1</td><td>Наркотики <strong>&lt;3 грамм</strong></td><td>$5.000–$20.000</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Правосудие, власть, управление (Главы XXIV–XXVI)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Статья</th><th>Описание</th><th>Наказание</th></tr></thead>
+                <tbody>
+                    <tr><td>24.1–24.3</td><td>Превышение / злоупотребление / халатность (без существенного ущерба)</td><td>$10.000–$20.000</td></tr>
+                    <tr><td>24.5</td><td>Нарушение территориальной юрисдикции</td><td>$20.000</td></tr>
+                    <tr><td>25.1</td><td>Незаконная агитация</td><td>$20.000</td></tr>
+                    <tr><td>26.1</td><td>Оскорбление</td><td>$20.000</td></tr>
+                    <tr><td>26.2</td><td>Клевета (юрлица)</td><td>$20.000</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Воздушный транспорт, финансы, здравоохранение (Главы XXVII–XXIX)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Статья</th><th>Описание</th><th>Наказание</th></tr></thead>
+                <tbody>
+                    <tr><td>27.1–27.6</td><td>Нарушения воздушного транспорта</td><td>$5.000–$20.000</td></tr>
+                    <tr><td>28.1</td><td>Реклама без лицензии</td><td>Физлицо до $50K, юрлицо до $100K</td></tr>
+                    <tr><td>29.1</td><td>Неквалифицированная медпомощь</td><td>$10.000 + возмещение</td></tr>
+                    <tr><td>29.19</td><td>Несвоевременная фин. отчётность</td><td>$10.000–$40.000</td></tr>
+                    <tr><td>29.20</td><td>Недостоверная фин. информация</td><td>$15.000–$50.000</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION: STATUTE OF LIMITATIONS -->
+<div class="section" id="statute">
+    <div class="section-header">
+        <span class="section-num">VII</span>
+        <span class="section-title">Сроки давности</span>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-label">Общий срок</div>
+            <div class="card-value">25 дней</div>
+            <div class="card-desc">Со дня совершения</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Федеральный розыск</div>
+            <div class="card-value">∞</div>
+            <div class="card-desc">Срок не применяется</div>
+        </div>
+    </div>
+
+    <div class="alert alert-red">
+        <div class="alert-title">Сроки давности НЕ применяются</div>
+        Ст. 6.1–6.4, 7.1, 8.1, 12.1–12.5, 14.1–14.3.2, 15.1–15.1.1, 16.1, 16.2, 16.4, 16.10, 17.1 + все лица в <strong>федеральном розыске</strong>
+    </div>
+</div>
+
+<!-- SECTION: INVESTIGATION -->
+<div class="section" id="investigation">
+    <div class="section-header">
+        <span class="section-num">VIII</span>
+        <span class="section-title">Допрос и следственные действия</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Перечень следственных действий</h3>
+        <ol>
+            <li>Допрос</li>
+            <li>Осмотр</li>
+            <li>Обыск</li>
+            <li>Выемка</li>
+            <li>Очная ставка</li>
+            <li>Опознание</li>
+            <li>Освидетельствование</li>
+            <li>Проверка показаний</li>
+            <li>Судебная экспертиза</li>
+            <li>Контроль и запись переговоров</li>
+            <li>Следственный эксперимент</li>
+            <li>Возбуждение дела</li>
+            <li>ОРМ</li>
+            <li>Задержание</li>
+        </ol>
+    </div>
+
+    <div class="subsection">
+        <h3>Правила допроса</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+                <tbody>
+                    <tr><td>Уведомление</td><td>Не позднее <strong>12 часов</strong> до допроса</td></tr>
+                    <tr><td>Длительность</td><td>Не более <strong>1 часа</strong></td></tr>
+                    <tr><td>Ночное время</td><td>Допрос по повестке запрещён <strong>22:00–6:00</strong></td></tr>
+                    <tr><td>Запись</td><td>Обязательная <strong>аудио-/видеозапись</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="alert alert-red">
+        <strong>Опознание:</strong> не менее <strong>3 лиц</strong> или <strong>3 предметов</strong>. Повторное опознание тем же лицом по тем же признакам <strong>запрещено</strong>.
+    </div>
+
+    <div class="alert alert-gold">
+        <strong>Контроль переговоров</strong> — только по <strong>судебному решению</strong>.
+    </div>
+</div>
+
+<!-- SECTION: COURT -->
+<div class="section" id="court">
+    <div class="section-header">
+        <span class="section-num">IX</span>
+        <span class="section-title">Судебные процедуры</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Виды уголовного преследования (ПК ст. 17.10)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Вид</th><th>Заявление потерпевшего</th><th>Прекращение примирением</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Публичное</strong></td><td>Не требуется</td><td>Нет</td></tr>
+                    <tr><td><strong>Частно-публичное</strong></td><td>Требуется</td><td>Нет</td></tr>
+                    <tr><td><strong>Частное</strong></td><td>Требуется</td><td>Да (ст. 6.6)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Решение прокурора по делу (ПК ст. 17.12)</h3>
+        <p>В течение <strong>1 суток</strong> (до 3 суток при сложности):</p>
+        <div class="arrow-flow">
+            <span class="step gold">а) Утвердить → в суд</span>
+            <span class="step">б) Вернуть следователю</span>
+            <span class="step gold">в) Утвердить + ордер</span>
+        </div>
+    </div>
+
+    <div class="alert alert-blue">
+        <strong>Состязательность:</strong> суд не выступает ни за обвинение, ни за защиту. Стороны равноправны перед судом.
+    </div>
+</div>
+
+<!-- SECTION: WANTED & BAIL -->
+<div class="section" id="wanted">
+    <div class="section-header">
+        <span class="section-num">X</span>
+        <span class="section-title">Розыск и залог</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Уровни розыска</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>★</th><th>Наказание</th><th>Залог</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="star star-1">★</span></td><td>До 1 года</td><td>$50.000</td></tr>
+                    <tr><td><span class="star star-2">★★</span></td><td>До 2 лет</td><td>$75.000</td></tr>
+                    <tr><td><span class="star star-3">★★★</span></td><td>До 3 лет</td><td>$100.000</td></tr>
+                    <tr><td><span class="star star-4">★★★★</span></td><td>До 4 лет</td><td>$125.000</td></tr>
+                    <tr><td><span class="star star-5">★★★★★</span></td><td>Свыше 4 лет</td><td>$150.000</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="alert alert-gold">
+        <strong>Формула залога:</strong> $25.000 + ($25.000 × ★). Применяется только по статьям, <strong>не влекущим судимость</strong>.
+    </div>
+</div>
+
+<!-- SECTION: CIRCUMSTANCES -->
+<div class="section" id="circumstances">
+    <div class="section-header">
+        <span class="section-num">XI</span>
+        <span class="section-title">Смягчающие и отягчающие обстоятельства</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Смягчающие (ст. 5.3)</h3>
+        <ul class="checklist">
+            <li>Физическое или психическое принуждение</li>
+            <li>Нарушение условий правомерности обороны / задержания</li>
+            <li>Противоправность поведения потерпевшего (повод)</li>
+            <li>Явка с повинной, активное способствование раскрытию</li>
+            <li>Оказание помощи потерпевшему, возмещение ущерба</li>
+        </ul>
+    </div>
+
+    <div class="subsection">
+        <h3>Отягчающие (ст. 5.4)</h3>
+        <ul class="checklist">
+            <li>Группа лиц</li>
+            <li>Мотивы ненависти (раса, национальность, религия)</li>
+            <li>Месть за правомерные действия</li>
+            <li>Особая жестокость, садизм</li>
+            <li>Использование доверия / служебного положения</li>
+            <li>Форменная одежда или документы власти</li>
+            <li>Алкогольное или наркотическое опьянение</li>
+            <li>Рецидивизм</li>
+            <li>Потерпевший в беспомощном положении</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECTION: FORCE -->
+<div class="section" id="force">
+    <div class="section-header">
+        <span class="section-num">XII</span>
+        <span class="section-title">Стадии применения силы</span>
+    </div>
+
+    <div class="arrow-flow">
+        <span class="step gold">1. Присутствие</span>
+        <span class="arrow">→</span>
+        <span class="step gold">2. Приказ</span>
+        <span class="arrow">→</span>
+        <span class="step gold">3. Физическая сила</span>
+        <span class="arrow">→</span>
+        <span class="step gold">4. Спецсредства</span>
+        <span class="arrow">→</span>
+        <span class="step gold">5. Огнестрельное оружие</span>
+    </div>
+
+    <div class="alert alert-gold">
+        Стадии соблюдаются по порядку. <strong>Исключение:</strong> экстренные ситуации — можно перейти к любой стадии (вооружённый преступник, угроза жизни).
+    </div>
+</div>
+
+<!-- SECTION: SCENARIOS -->
+<div class="section" id="scenarios">
+    <div class="section-header">
+        <span class="section-num">XIII</span>
+        <span class="section-title">Быстрые подсказки — сценарии</span>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">При задержании госслужащего</div>
+        <div class="scenario-body">
+            <ol>
+                <li>Вызови <strong>руководство</strong> + <strong>сотрудника ОГП</strong></li>
+                <li>Заморозь срок — до <strong>9 мин</strong> (ожидание), до <strong>15 мин</strong> (при ответе)</li>
+                <li>Оцени <strong>правомерность</strong> → нет состава = освобождение</li>
+                <li>Лишение свободы → работодатель <strong>обязан уволить</strong></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Проверка доказательств — чек-лист</div>
+        <div class="scenario-body">
+            <ul class="checklist">
+                <li>Были ли зачитаны <strong>права Миранды</strong>? → Нет → всё <strong>недопустимо</strong></li>
+                <li>Законно ли получен <strong>ордер</strong>? → Нет → улики <strong>недопустимы</strong></li>
+                <li>Есть ли <strong>запись в БД</strong>? → Да → вина <strong>доказана автоматически</strong></li>
+                <li>Свидетели <strong>не заинтересованные</strong>? → Родственники/знакомые = <strong>НЕ свидетели</strong></li>
+                <li>Показания <strong>не на догадке/слухе</strong>?</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">При направлении дела в суд</div>
+        <div class="scenario-body">
+            <ol>
+                <li>Утверди <strong>обвинительное заключение</strong> (1–3 суток)</li>
+                <li>Направь дело в <strong>суд</strong></li>
+                <li>Уведомь <strong>обвиняемого, защитника, потерпевшего</strong></li>
+                <li>Вручи <strong>копию</strong> обвинительного заключения обвиняемому</li>
+                <li>Явись в суд как <strong>государственный обвинитель</strong></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Когда НЕ применяются сроки давности</div>
+        <div class="scenario-body">
+            <ul class="checklist">
+                <li>Статья ★★★★★? → <strong>Не применяются</strong></li>
+                <li>Федеральная статья из списка исключений? → <strong>Не применяются</strong></li>
+                <li>Лицо в федеральном розыске? → <strong>Не применяются</strong></li>
+                <li>Всё остальное → <strong>25 дней</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION: CIVIL CODE -->
+<div class="section" id="civil">
+    <div class="section-header">
+        <span class="section-num">XIV</span>
+        <span class="section-title">Гражданский кодекс — краткий справочник</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Основные начала (ГК ст. 1)</h3>
+        <div class="arrow-flow">
+            <span class="step">Равенство</span>
+            <span class="step">Неприкосновенность собственности</span>
+            <span class="step">Свобода договора</span>
+            <span class="step">Добросовестность</span>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Способы защиты прав (ГК ст. 9)</h3>
+        <ul>
+            <li>Признание права</li>
+            <li>Восстановление положения</li>
+            <li>Признание сделки недействительной</li>
+            <li>Самозащита права</li>
+            <li><strong>Возмещение убытков</strong> (реальный ущерб + упущенная выгода)</li>
+            <li><strong>Компенсация морального вреда</strong></li>
+        </ul>
+    </div>
+
+    <div class="subsection">
+        <h3>Сделки (ГК ст. 30–37)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Тип</th><th>Когда</th></tr></thead>
+                <tbody>
+                    <tr><td>Устная</td><td>Сделки, исполняемые при самом совершении</td></tr>
+                    <tr><td>Письменная простая</td><td>Сделки юрлиц между собой и с гражданами</td></tr>
+                    <tr><td>Гос. регистрация</td><td>Когда предусмотрена законом</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div><!-- /civil -->
+
+<!-- ============================================ -->
+<!-- LAWYER SECTIONS (visible in lawyer mode)     -->
+<!-- ============================================ -->
+
+<!-- LAWYER: QUICK REF -->
+<div class="section lawyer-only" id="lawyer-quick">
+    <div class="section-header">
+        <span class="section-num">00</span>
+        <span class="section-title">Быстрый справочник адвоката</span>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-label">Срок задержания</div>
+            <div class="card-value">60 мин</div>
+            <div class="card-desc">Максимум с момента задержания</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Конф. беседа</div>
+            <div class="card-value">10 мин</div>
+            <div class="card-desc">С задержанным доверителем</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Звонок адвокату</div>
+            <div class="card-value">3 мин</div>
+            <div class="card-desc">Только частному адвокату</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Залог</div>
+            <div class="card-value">&lt; 4 ★</div>
+            <div class="card-desc">Только до 3 звёзд включительно</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Срок давности</div>
+            <div class="card-value">25 дн.</div>
+            <div class="card-desc">Общий срок</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Презумпция</div>
+            <div class="card-value">Не виновен</div>
+            <div class="card-desc">До вступления решения в силу</div>
+        </div>
+    </div>
+
+    <div class="alert alert-green">
+        <div class="alert-title">Ключевой принцип</div>
+        <strong>УАК ст. 1.4 ч.3:</strong> Лицо не обязано доказывать свою невиновность. Неустранимые сомнения толкуются в пользу лица, привлекаемого к ответственности.
+    </div>
+
+    <div class="miranda">
+        <div class="miranda-label">Правило Миранды — проверяй при задержании</div>
+        <div class="miranda-text">&#171;Вы имеете право хранить молчание. Всё, что вы скажете, может и будет использовано против Вас в суде. Вы имеете право на один телефонный звонок. Также Вы имеете право на адвоката, частного и государственного. Вы понимаете свои права?&#187;</div>
+    </div>
+</div>
+
+<!-- LAWYER I: SUBJECTS -->
+<div class="section lawyer-only" id="lawyer-subjects">
+    <div class="section-header">
+        <span class="section-num">I</span>
+        <span class="section-title">Субъекты задержания (ПК 3.4)</span>
+    </div>
+
+    <div class="alert alert-red">
+        <div class="alert-title">ПК 3.4 ч.2 — Посторонние лица</div>
+        Присутствие иных лиц в процессе задержания <strong>не допускается</strong>. Госслужащие вправе потребовать посторонних граждан отойти от места задержания на <strong>6 метров</strong>, а также покинуть помещение.
+    </div>
+
+    <div class="subsection">
+        <h3>Субъекты задержания</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Сторона обвинения</th><th>Сторона защиты</th></tr></thead>
+                <tbody>
+                    <tr><td>Инициатор задержания</td><td>Задержанный</td></tr>
+                    <tr><td>Прокурор (макс. 1)</td><td>Адвокат (макс. 1)</td></tr>
+                    <tr><td>Руководство</td><td></td></tr>
+                    <tr><td>Сотрудники USSS (при проводе)</td><td></td></tr>
+                    <tr><td>Сотрудники IB</td><td></td></tr>
+                    <tr><td>Сотрудники профильных подразделений</td><td></td></tr>
+                    <tr><td>Губернатор и советники</td><td></td></tr>
+                    <tr><td>Глава администрации</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- LAWYER II: GROUNDS -->
+<div class="section lawyer-only" id="lawyer-grounds">
+    <div class="section-header">
+        <span class="section-num">II</span>
+        <span class="section-title">Основания для задержания (ПК 3.2)</span>
+    </div>
+
+    <div class="subsection">
+        <h3>ПК 3.2 ч.1</h3>
+        <p>Лицо может быть задержано по подозрению в совершении правонарушения.</p>
+    </div>
+
+    <div class="subsection">
+        <h3>ПК 3.2 ч.2 — 8 оснований</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Буква</th><th>Основание</th><th>Примечание</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>а</strong></td><td>Лицо застигнуто при совершении преступления</td><td>Сотрудником ПОО</td></tr>
+                    <tr><td><strong>б</strong></td><td>Обнаружены явные следы правонарушения</td><td>На лице, одежде, в жилище</td></tr>
+                    <tr><td><strong>в</strong></td><td>3+ свидетелей указывают на лицо</td><td><strong>НЕ:</strong> родственники, знакомые, коллеги</td></tr>
+                    <tr><td><strong>г</strong></td><td>Фото/видео фиксация правонарушения</td><td>—</td></tr>
+                    <tr><td><strong>д</strong></td><td>Ордер, изданный в установленном порядке</td><td>—</td></tr>
+                    <tr><td><strong>е</strong></td><td>Приказ Губернатора / ГП / зама ГП</td><td>—</td></tr>
+                    <tr><td><strong>ж</strong></td><td>Ориентировка на ТС или лицо</td><td>—</td></tr>
+                    <tr><td><strong>з</strong></td><td>Лицо находится в розыске</td><td>—</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="alert alert-red">
+        <div class="alert-title">⚠ Свидетели</div>
+        Свидетелем <strong>НЕ могут</strong> быть: родственники, знакомые, коллеги и другие заинтересованные лица.
+    </div>
+</div>
+
+<!-- LAWYER III: ORDER -->
+<div class="section lawyer-only" id="lawyer-order">
+    <div class="section-header">
+        <span class="section-num">III</span>
+        <span class="section-title">Порядок задержания (ПК 3.3)</span>
+    </div>
+
+    <div class="subsection">
+        <h3>9 стадий задержания (до 60 минут)</h3>
+        <ol class="steps">
+            <li>Надеть <strong>наручники</strong></li>
+            <li>Предъявить <strong>служебное удостоверение / ОПЗ</strong></li>
+            <li>Провести <strong>первичный обыск</strong> (по усмотрению)</li>
+            <li>Разъяснить квалификацию и <strong>зачитать правило Миранды</strong></li>
+            <li>Установить <strong>личность</strong></li>
+            <li>Доставить в <strong>уполномоченный орган</strong> для следственных действий</li>
+            <li>Реализовать <strong>права задержанного</strong></li>
+            <li>Провести <strong>следственные действия</strong></li>
+            <li>Доставить в <strong>место содержания</strong> (КПЗ)</li>
+        </ol>
+    </div>
+
+    <div class="alert alert-blue">
+        <strong>Арест (ПК 4):</strong> после задержания — вторичный обыск, изъятие нелегальных предметов, установка уровня розыска, разъяснение причины ареста, помещение в КПЗ.
+    </div>
+</div>
+
+<!-- LAWYER IV: RELEASE -->
+<div class="section lawyer-only" id="lawyer-release">
+    <div class="section-header">
+        <span class="section-num">IV</span>
+        <span class="section-title">Основания для освобождения (ПК 3.6 ч.1)</span>
+    </div>
+
+    <div class="subsection">
+        <h3>5 оснований для обязательного освобождения</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>№</th><th>Основание</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>а</strong></td><td>Не подтвердилось подозрение в совершении правонарушения</td></tr>
+                    <tr><td><strong>б</strong></td><td>За нарушение не предусмотрено меры наказания в виде лишения свободы</td></tr>
+                    <tr><td><strong>в</strong></td><td>Задержание произведено с нарушением ч. 2 ст. 3.2 ПК</td></tr>
+                    <tr><td><strong>г</strong></td><td>Прошло больше 1 часа с момента задержания и не избрана мера наказания</td></tr>
+                    <tr><td><strong>д</strong></td><td>Подозреваемый обладает <strong>статусом неприкосновенности</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Если есть основания для освобождения — скажи:</div>
+        <div class="scenario-body">
+            <div class="copy-block">
+                <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+                <div class="copy-text">&#171;Исходя из предоставленной видеофиксации, рекомендую освободить гражданина (основание: ПК ст. 3.6 ч.1 п. __, ст. 2.2 ПК)&#187;</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Если нет оснований для освобождения — скажи:</div>
+        <div class="scenario-body">
+            <div class="copy-block">
+                <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+                <div class="copy-text">&#171;Исходя из представленной видеофиксации, основания для освобождения я не заметил. В дальнейшие процессуальные действия я не вмешиваюсь.&#187;</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- LAWYER V: CONFIDENTIAL MEETING -->
+<div class="section lawyer-only" id="lawyer-conf">
+    <div class="section-header">
+        <span class="section-num">V</span>
+        <span class="section-title">Конфиденциальная беседа (ПК 3.8)</span>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-label">Длительность</div>
+            <div class="card-value">10 мин</div>
+            <div class="card-desc">Конфиденциальная встреча</div>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>После окончания беседы — вопросы задержанному:</h3>
+        <ol>
+            <li>&#171;Сведения, полученные в ходе конфиденциальной беседы, дают право разглашать?&#187;</li>
+            <li>&#171;Со следствием готовы сотрудничать?&#187;</li>
+        </ol>
+    </div>
+</div>
+
+<!-- LAWYER VI: RIGHTS -->
+<div class="section lawyer-only" id="lawyer-rights">
+    <div class="section-header">
+        <span class="section-num">VI</span>
+        <span class="section-title">Права адвоката</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Закон об адвокатской деятельности (ст. 3 ч.2)</h3>
+        <ul>
+            <li><strong>П. &laquo;а&raquo;</strong> — Собирать сведения и документы, необходимые для юридической помощи</li>
+            <li><strong>П. &laquo;д&raquo;</strong> — Провести конфиденциальную встречу с задержанным доверителем</li>
+            <li><strong>П. &laquo;ж&raquo;</strong> — Запрещено препятствовать законной деятельности адвоката</li>
+        </ul>
+    </div>
+
+    <div class="subsection">
+        <h3>Дополнительные права</h3>
+        <ul>
+            <li>Требовать разъяснить причину задержания <strong>(ПК 3.9 ч.1 п. &laquo;б&raquo;)</strong></li>
+            <li>Требовать видеофиксацию нарушения <strong>(ПК 3.9 ч.1 п. &laquo;в&raquo;)</strong></li>
+            <li>Находиться на территории этажа КПЗ в здании LSPD, LSSD, FIB <strong>(Приложение к УАК о ЗОТ-е)</strong></li>
+            <li>Заключить устный договор с задержанным доверителем на оказание юридической помощи</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-green">
+        <div class="alert-title">Иммунитет гос. адвоката (Закон об АД ст. 2 ч.7)</div>
+        Не допускаются: привод, задержание, личный обыск, обыск вещей и транспорта. <strong>Исключения:</strong> угроза жизни при наркотическом/психическом состоянии, ордер ГП/зама, решение суда, совершение преступления.
+    </div>
+</div>
+
+<!-- LAWYER VII: DUTIES -->
+<div class="section lawyer-only" id="lawyer-duties">
+    <div class="section-header">
+        <span class="section-num">VII</span>
+        <span class="section-title">Обязанности адвоката</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Обязанности</h3>
+        <ul>
+            <li>По требованию показывать <strong>удостоверение</strong> любому гос. сотруднику для нахождения на З.О.Т. <strong>(Закон об АД ст. 4 ч.1 п. &laquo;в&raquo;, &laquo;г&raquo;)</strong></li>
+            <li>Соблюдать Этический кодекс <strong>(для государственных адвокатов)</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- LAWYER VIII: BANS -->
+<div class="section lawyer-only" id="lawyer-bans">
+    <div class="section-header">
+        <span class="section-num">VIII</span>
+        <span class="section-title">Запреты адвоката</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Запрещено</h3>
+        <ul>
+            <li>Занимать позицию <strong>против доверителя</strong> и заявлять о доказанности вины, если доверитель её не признаёт</li>
+            <li>Разглашать сведения, полученные от доверителя, без разрешения <strong>(Адвокатская тайна)</strong></li>
+            <li>Препятствовать законной деятельности гос. органов</li>
+        </ul>
+    </div>
+</div>
+
+<!-- LAWYER IX: STATUS -->
+<div class="section lawyer-only" id="lawyer-status">
+    <div class="section-header">
+        <span class="section-num">IX</span>
+        <span class="section-title">Гос. vs Частный адвокат</span>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Параметр</th><th>Государственный</th><th>Частный</th></tr></thead>
+            <tbody>
+                <tr><td>Статус</td><td>Госслужащий (исполнительная структура)</td><td>Частное лицо с лицензией</td></tr>
+                <tr><td>Документ</td><td>Служебное удостоверение гос. образца</td><td>Адвокатская лицензия</td></tr>
+                <tr><td>Иммунитет</td><td>✅ Полный (ст. 2 ч.7)</td><td>❌ Нет</td></tr>
+                <tr><td>Этический кодекс</td><td>✅ Обязателен</td><td>❌ Не применяется</td></tr>
+                <tr><td>Права в КПЗ</td><td>✅ По удостоверению</td><td>✅ По лицензии</td></tr>
+                <tr><td>Устный договор</td><td>✅</td><td>✅</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-gold">
+        <strong>Закон об АД ст. 6 ч.3:</strong> Частный адвокат обладает теми же правами, обязанностями и запретами, что и государственный адвокат, за исключением обязанности соблюдения Этического кодекса.
+    </div>
+</div>
+
+<!-- LAWYER X: OBJECTIONS -->
+<div class="section lawyer-only" id="lawyer-objections">
+    <div class="section-header">
+        <span class="section-num">X</span>
+        <span class="section-title">Возражения гос. сотруднику</span>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Возражение госника</th><th>Аргументация</th><th>Пояснение</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>&#171;Я не обязан доказывать вину задержанного&#187;</td>
+                    <td><strong>УАК ст. 1.4</strong> Принцип вины</td>
+                    <td>Лицо считается невиновным, пока вина не доказана. Лицо не обязано доказывать свою невиновность. Неустранимые сомнения толкуются в пользу обвиняемого. Объективное вменение не допускается.</td>
+                </tr>
+                <tr>
+                    <td>&#171;Я не обязан разъяснять/доказывать что-либо&#187;</td>
+                    <td><strong>ПК ст. 2.3.1</strong> Обстоятельства, подлежащие доказыванию</td>
+                    <td>Обязаны доказывать: событие правонарушения, виновность и форму вины, характер и размер вреда, исключающие обстоятельства, смягчающие/отягчающие, обстоятельства для освобождения.</td>
+                </tr>
+                <tr>
+                    <td>&#171;Поведение обвиняемого не является смягчающим обстоятельством&#187;</td>
+                    <td><strong>УК ст. 5.5</strong> Назначение более мягкого наказания</td>
+                    <td>При наличии исключительных обстоятельств (цели, мотивы, роль, поведение после преступления) — наказание может быть назначено ниже низшего предела.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- LAWYER XI: EXEMPTION ARTICLES -->
+<div class="section lawyer-only" id="lawyer-articles">
+    <div class="section-header">
+        <span class="section-num">XI</span>
+        <span class="section-title">Обстоятельства, исключающие преступность (Глава 4 УАК)</span>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-label">Статья 4</div>
+            <div class="card-value" style="font-size:16px">Необходимая оборона</div>
+            <div class="card-desc">Защита от нападения</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.1</div>
+            <div class="card-value" style="font-size:16px">Задержание</div>
+            <div class="card-desc">Вред при задержании преступника</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.2</div>
+            <div class="card-value" style="font-size:16px">Крайняя необходимость</div>
+            <div class="card-desc">Устранение опасности</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.3</div>
+            <div class="card-value" style="font-size:16px">Обоснованный риск</div>
+            <div class="card-desc">Для общественно полезной цели</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.4</div>
+            <div class="card-value" style="font-size:16px">Исполнение приказа</div>
+            <div class="card-desc">По закону</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.5</div>
+            <div class="card-value" style="font-size:16px">Принуждение</div>
+            <div class="card-desc">Физическое или психическое</div>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Статьи УАК, по которым можно задержать госника</h3>
+        <div class="alert alert-gold">
+            6.1, 6.2, 6.3, 6.7, 8.1, 9.1, 9.2, 10.4, 12.1, 12.7, 12.8, 13.4, 14.2, 15.4, 16.1 ч.2, 16.15, 17.1, 17.2, 18.3 — а также по <strong>ордеру</strong> либо <strong>суду</strong>.
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Формы вины (УАК ст. 2.4)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Форма</th><th>Описание</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Умысел</strong></td><td>Лицо осознавало опасность, предвидело последствия и желало/сознательно допускало их</td></tr>
+                    <tr><td><strong>Неосторожность</strong></td><td>Преступление только в случаях, прямо предусмотренных кодексом</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Невиновное причинение вреда (УАК ст. 2.7)</h3>
+        <p>Деяние признается невиновным, если лицо <strong>не могло осознавать</strong> опасность своих действий или <strong>не могло предотвратить</strong> последствия в силу экстремальных условий или перегрузок.</p>
+    </div>
+
+    <div class="subsection">
+        <h3>Малозначительность (УАК ст. 3)</h3>
+        <p>Не является преступлением действие, хотя формально содержащее признаки состава, но в силу <strong>малозначительности не представляющее общественной опасности</strong>.</p>
+    </div>
+</div>
+
+<!-- LAWYER XII: MONOLOGUE -->
+<div class="section lawyer-only" id="lawyer-monologue">
+    <div class="section-header">
+        <span class="section-num">XII</span>
+        <span class="section-title">Монолог при некомпетентном госнике</span>
+    </div>
+
+    <div class="alert alert-blue">
+        <div class="alert-title">Когда использовать</div>
+        Государственный сотрудник создаёт препятствия, не отвечает на вопросы, затягивает процесс или отказывает в предоставлении информации.
+    </div>
+
+    <div class="copy-block">
+        <button class="copy-btn" onclick="copyText(this)">Копировать</button>
+        <div class="copy-text">Уважаемый сотрудник, я, [Имя Фамилия], являюсь действующим государственным/частным адвокатом, представляющий интересы своего подзащитного в рамках предоставления юридической помощи, согласно статье 3, части 2, пункту А и В закона "Об адвокатской деятельности", обладаю правом собирать необходимые сведения от государственных структур для юридической помощи и защиты моего подзащитного. Вы, как представитель таковой структуры, обязаны без искусственно созданных бюрократических затягиваний и препятствий отвечать на мои вопросы необходимые для юр.помощи и предоставлять запрашиваемые мной сведения и документы в целом.
+
+Также в соответствии со статьей 3.4 части 1 Процессуального кодекса, я как адвокат участвую как субъект задержания наравне со стороной обвинения. Это означает, что я имею право знать о собранных по делу доказательствах, заявлять ходатайства о получении дополнительных сведений и требовать проверки обстоятельств, оправдывающих или смягчающих ответственность моего подзащитного.
+
+Руководствуясь принципом гласности, регламентированной статьей 1.8 части 5 процессуального кодекса, любой государственный орган власти обязан обеспечить каждому возможность ознакомления с документами и материалами, непосредственно затрагивающими его права и свободы, это также значит что вы, как орган гос. власти, обязаны информировать моего подзащитного о любых принятых решениях в рамках его дела, включая принятые решение о виновности моего доверителя и её форме, обстоятельствах освобождающих или влияющих на меру наказания, приобщению любых доказательств к делу и тому-подобного.
+
+Хочу особо обратить ваше внимание на статью 16.1 часть 2 Уголовного кодекса, которая устанавливает уголовную ответственность за воспрепятствование законной деятельности адвоката. Систематический отказ в предоставлении информации, несвоевременное реагирование на ходатайства и требования или создание иных препятствий в моей работе могут быть квалифицированы как уголовно наказуемое деяние.</div>
+    </div>
+</div>
+
+<!-- LAWYER XIII: Q&A -->
+<div class="section lawyer-only" id="lawyer-qa">
+    <div class="section-header">
+        <span class="section-num">XIII</span>
+        <span class="section-title">Вопросы к гос. сотруднику</span>
+    </div>
+
+    <div class="alert alert-gold">
+        <div class="alert-title">Правило</div>
+        Вопросы задавать исключительно, если хотите &laquo;задушить&raquo; или если сотрудник плохо работает.
+    </div>
+
+    <div class="table-wrap">
+        <table class="qa-table">
+            <thead><tr><th>№</th><th>Вопрос</th><th>Правильный ответ</th><th>Неправильный ответ</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Из-за каких причин вы начали следственные действия по отношению к задержанному?</td><td class="answer-correct">Непосредственный очевидец; Потерпевшие/очевидцы обратились; Обнаружены явные следы; Получены материалы от должностных лиц</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>2</td><td>Какие были проведены виды следственных действий?</td><td class="answer-correct">Допрос, осмотр, обыск, выемка, очная ставка, опознание, освидетельствование, проверка показаний, произв. судебной экспертизы, контроль/запись переговоров, следственный эксперимент, возбуждение дела, ОРМ, задержание</td><td class="answer-wrong">Само производство экспертизы; Получение образцов</td></tr>
+                <tr><td>3</td><td>Какими принципами вы руководствовались при задержании?</td><td class="answer-correct">Адекватность, Безотлагательность</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>4</td><td>Какой был проведен вид порядка задержания?</td><td class="answer-correct">Для нетрудоустроенных на гос. службу; Для трудоустроенных на гос. службу</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>5</td><td>По какому виду преступления было задержание?</td><td class="answer-correct">По федеральной (F); По региональной (R); По F/R</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>6</td><td>Кто был субъектом на момент начала задержания?</td><td class="answer-correct">Перечислить всех лиц</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>7</td><td>Какое было время задержания?</td><td class="answer-correct">Назвать время; Нужно уточнить по видеофиксации; Не могу назвать точно, примерное время ___</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>8</td><td>В каком месте вы проводили задержание?</td><td class="answer-correct">Задержание было в ___ с упоминанием объектов окружения; Нужно уточнить по видеофиксации; Не могу назвать точно, примерное место ___</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>9</td><td>Кто инициировал процедуру задержания?</td><td class="answer-correct">Я сам (сотрудник вызвавший вас); Кто-то передал дело</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>10</td><td>На каком основании вы задержали гражданина?</td><td class="answer-correct">Лицо застигнуто; Явные следы; Видеофиксация; Нормативный документ; Скрывает личность; Находится в розыске</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>11</td><td>Задержанный скрывал свою личность?</td><td class="answer-correct">Да / Нет</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>12</td><td>Если задержанный скрывал личность: Вы провели процесс установки личности?</td><td class="answer-correct">Да; Нет, если задержанный что-то нарушил до того</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>13</td><td>1. Вы меняли порядок задержания? 2. Какие стадии и пункты? 3. Какие причины? 4. Причина существенная?</td><td class="answer-correct">3. Существовала опасность жизни сотрудника или гражданских лиц. 4. Существующие обстоятельства не регламентированы</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>14</td><td>Вы объяснили задержанному причину задержания? Назвали НПА?</td><td class="answer-correct">Да</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>15</td><td>Вы зачитали правило Миранды задержанному? Сколько раз? Задержанный понял права?</td><td class="answer-correct">Ответ по факту</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>16</td><td>В случае первичного задержания по розыску — Вы проводили первичный обыск? Если нет, то почему?</td><td class="answer-correct">Ответ по факту</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>17</td><td>Что-то было изъято при первичном обыске?</td><td class="answer-correct">Ответ по факту</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>18</td><td>Какие стадии применения силы были проведены? Были ли они применены по порядку? Если нет, то почему?</td><td class="answer-correct">Ответ по факту</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+                <tr><td>19</td><td>Если было применение летального оружия: По какой причине? Угрожала ли это жизни граждан?</td><td class="answer-correct">Ответ по факту</td><td class="answer-wrong">Не знаю; Не буду отвечать</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- LAWYER XIV: Q&A RULES -->
+<div class="section lawyer-only" id="lawyer-qa-rules">
+    <div class="section-header">
+        <span class="section-num">XIV</span>
+        <span class="section-title">Правила вопросов и ответов</span>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>№</th><th>Вопрос</th><th>Правильный ответ</th><th>Неправильный ответ</th><th>Некомпетентность?</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Отсутствие ответа на поставленный вопрос является некомпетентностью?</td><td class="answer-correct">Да</td><td class="answer-wrong">Нет; Любой другой ответ не из списка правильных</td><td><strong>Да</strong></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="subsection">
+        <h3>Шаблонные правильные ответы</h3>
+        <div class="alert alert-green">
+            &#171;В соответствии с нормативно-правовыми актами&#187;
+            <br>&#171;Согласно [кодекс/закон]&#187;
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Шаблонные неправильные ответы</h3>
+        <div class="alert alert-red">
+            &#171;Не знаю&#187;
+            <br>&#171;Не буду отвечать на вопрос&#187;
+            <br>&#171;Нет&#187;
+            <br>Любой другой ответ не из списка правильных
+        </div>
+    </div>
+</div>
+
+</div><!-- /content -->
+</main><!-- /main -->
+
+<!-- FOOTER -->
+<footer class="footer">
+    Составлено на основе: Уголовно-Административного кодекса, Процессуального кодекса, Гражданского кодекса и Закона о деятельности Офиса Генерального Прокурора штата Сан-Андреас<br>
+    Majestic RP — Department of Justice — 2026
+</footer>
+
+<script>
+    // ROLE TOGGLE
+    const roleToggle = document.getElementById('roleToggle');
+    const roleBtns = roleToggle.querySelectorAll('.role-btn');
+    const headerRoleText = document.querySelector('.header-role-text');
+
+    roleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            roleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const role = btn.dataset.role;
+            if (role === 'lawyer') {
+                document.body.classList.add('lawyer-mode');
+                headerRoleText.textContent = 'адвоката';
+            } else {
+                document.body.classList.remove('lawyer-mode');
+                headerRoleText.textContent = 'прокурора';
+            }
+            clearSearch();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    // SIDEBAR COLLAPSIBLE GROUPS
+    document.querySelectorAll('.sidebar-group-toggle').forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            toggle.closest('.sidebar-group').classList.toggle('collapsed');
+        });
+    });
+
+    // BACK TO TOP
+    const backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '&#9650;';
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // COPY BUTTON
+    function copyText(btn) {
+        const textBlock = btn.nextElementSibling;
+        const text = textBlock.textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Скопировано!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Копировать';
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    }
+
+    // Sidebar active link tracking
+    const sections = document.querySelectorAll('.section');
+    const links = document.querySelectorAll('.sidebar-link');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                links.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                });
+            }
+        });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Smooth scroll for sidebar links
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // SEARCH FUNCTIONALITY
+    const searchInput = document.getElementById('searchInput');
+    const searchNav = document.getElementById('searchNav');
+    const searchCount = document.getElementById('searchCount');
+    const searchPrev = document.getElementById('searchPrev');
+    const searchNext = document.getElementById('searchNext');
+    const searchClose = document.getElementById('searchClose');
+    const headerSearch = document.getElementById('headerSearch');
+    const content = document.querySelector('.content');
+
+    let highlights = [];
+    let currentIndex = -1;
+
+    // Ctrl+K to focus search
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.select();
+        }
+        if (e.key === 'Escape') {
+            clearSearch();
+            searchInput.blur();
+        }
+        if (highlights.length > 0) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    navigateSearch(-1);
+                } else {
+                    navigateSearch(1);
+                }
+            }
+        }
+    });
+
+    let debounceTimer;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            performSearch(searchInput.value);
+        }, 150);
+    });
+
+    searchPrev.addEventListener('click', () => navigateSearch(-1));
+    searchNext.addEventListener('click', () => navigateSearch(1));
+    searchClose.addEventListener('click', () => {
+        clearSearch();
+        searchInput.blur();
+    });
+
+    function clearSearch() {
+        clearHighlights();
+        clearDimming();
+        highlights = [];
+        currentIndex = -1;
+        searchNav.classList.remove('visible');
+        headerSearch.classList.remove('has-results');
+        searchInput.value = '';
+        searchCount.textContent = '0 / 0';
+    }
+
+    function clearHighlights() {
+        const marks = content.querySelectorAll('mark.search-highlight, mark.search-current');
+        marks.forEach(mark => {
+            const parent = mark.parentNode;
+            parent.replaceChild(document.createTextNode(mark.textContent), mark);
+            parent.normalize();
+        });
+    }
+
+    function clearDimming() {
+        content.querySelectorAll('.search-dim').forEach(el => el.classList.remove('search-dim'));
+        content.querySelectorAll('.search-section-match').forEach(el => el.classList.remove('search-section-match'));
+    }
+
+    function escapeRegex(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function performSearch(query) {
+        clearHighlights();
+        clearDimming();
+        highlights = [];
+        currentIndex = -1;
+
+        if (!query || query.trim().length < 2) {
+            searchNav.classList.remove('visible');
+            headerSearch.classList.remove('has-results');
+            searchCount.textContent = '0 / 0';
+            return;
+        }
+
+        const term = query.trim().toLowerCase();
+        const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');
+
+        const searchables = content.querySelectorAll('.section:not(.lawyer-only):not(.prosecutor-only), .section.lawyer-only, .section.prosecutor-only, details, .card, .scenario, .alert, .miranda, .page-title');
+        let hasAny = false;
+
+        const visibleSearchables = Array.from(searchables).filter(el => {
+            if (el.classList.contains('lawyer-only') && !document.body.classList.contains('lawyer-mode')) return false;
+            if (el.classList.contains('prosecutor-only') && document.body.classList.contains('lawyer-mode')) return false;
+            return true;
+        });
+
+        visibleSearchables.forEach(el => {
+            const text = el.textContent.toLowerCase();
+            if (text.includes(term)) hasAny = true;
+        });
+
+        if (!hasAny) {
+            searchNav.classList.remove('visible');
+            headerSearch.classList.remove('has-results');
+            searchCount.textContent = '0 / 0';
+            visibleSearchables.forEach(el => el.classList.add('search-dim'));
+            return;
+        }
+
+        visibleSearchables.forEach(el => {
+            if (!el.textContent.toLowerCase().includes(term)) {
+                el.classList.add('search-dim');
+            } else {
+                if (el.classList.contains('section') || el.tagName === 'DETAILS') {
+                    el.classList.add('search-section-match');
+                }
+                highlightText(el, regex);
+            }
+        });
+
+        highlights = Array.from(content.querySelectorAll('mark.search-highlight'));
+
+        if (highlights.length > 0) {
+            currentIndex = 0;
+            updateCurrentHighlight();
+            searchNav.classList.add('visible');
+            headerSearch.classList.add('has-results');
+            updateCount();
+
+            highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    function highlightText(element, regex) {
+        const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, {
+            acceptNode: (node) => {
+                if (node.parentElement.tagName === 'SCRIPT' ||
+                    node.parentElement.tagName === 'STYLE' ||
+                    node.parentElement.tagName === 'MARK') {
+                    return NodeFilter.FILTER_REJECT;
+                }
+                return regex.test(node.textContent) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            }
+        });
+
+        const textNodes = [];
+        while (walker.nextNode()) {
+            textNodes.push(walker.currentNode);
+        }
+
+        textNodes.forEach(node => {
+            const span = document.createElement('span');
+            span.innerHTML = node.textContent.replace(regex, '<mark class="search-highlight">$1</mark>');
+            node.parentNode.replaceChild(span, node);
+
+            span.querySelectorAll('mark.search-highlight').forEach(mark => {
+                highlights.push(mark);
+            });
+
+            while (span.childNodes.length > 0) {
+                span.parentNode.insertBefore(span.childNodes[0], span);
+            }
+            span.parentNode.removeChild(span);
+        });
+    }
+
+    function navigateSearch(direction) {
+        if (highlights.length === 0) return;
+
+        currentIndex = (currentIndex + direction + highlights.length) % highlights.length;
+        updateCurrentHighlight();
+        updateCount();
+
+        highlights[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        const parentDetails = highlights[currentIndex].closest('details');
+        if (parentDetails && !parentDetails.open) {
+            parentDetails.open = true;
+        }
+    }
+
+    function updateCurrentHighlight() {
+        highlights.forEach((h, i) => {
+            h.className = i === currentIndex ? 'search-current' : 'search-highlight';
+        });
+    }
+
+    function updateCount() {
+        searchCount.textContent = `${currentIndex + 1} / ${highlights.length}`;
+    }
+</script>
+
+</body>
+</html>
