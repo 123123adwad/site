@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Памятка LSPD — Majestic RP New York</title>
+    <style>
+        :root {
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #131313;
+            --bg-card: #181818;
+            --bg-card-hover: #1e1e1e;
+            --bg-hover: #212121;
+            --bg-input: #161616;
+            --accent-primary: #5b9de6;
+            --accent-primary-light: #7db8f0;
+            --accent-primary-dim: #3a7cc4;
+            --accent-primary-glow: rgba(91, 157, 230, 0.15);
+            --accent-primary-glow2: rgba(91, 157, 230, 0.06);
+            --accent-primary-border: rgba(91, 157, 230, 0.25);
+            --accent-primary-gradient: linear-gradient(135deg, #5b9de6, #7db8f0);
+            --accent-red: #d94c4c;
+            --accent-red-soft: rgba(217, 76, 76, 0.1);
+            --accent-red-border: rgba(217, 76, 76, 0.3);
+            --accent-green: #4dbf6e;
+            --accent-green-soft: rgba(77, 191, 110, 0.1);
+            --accent-green-border: rgba(77, 191, 110, 0.3);
+            --accent-gold: #d4a84b;
+            --accent-gold-glow2: rgba(212, 168, 75, 0.06);
+            --accent-gold-border: rgba(212, 168, 75, 0.25);
+            --text-primary: #f0f0f0;
+            --text-secondary: #a8a8a8;
+            --text-muted: #5a5a5a;
+            --border-color: #1e1e1e;
+            --border-light: #282828;
+            --border-card: #222222;
+            --sidebar-width: 280px;
+            --header-height: 60px;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+            --transition-fast: 0.12s ease;
+            --transition-normal: 0.2s ease;
+            --transition-slow: 0.35s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #333 var(--bg-primary); }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: radial-gradient(ellipse at 20% 0%, rgba(91,157,230,0.04) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 100%, rgba(91,157,230,0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+        .header {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: var(--header-height);
+            background: rgba(13, 13, 13, 0.85);
+            border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; padding: 0 24px;
+            z-index: 1000;
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+        }
+        .header::after {
+            content: '';
+            position: absolute; bottom: -1px; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary-border), transparent);
+            opacity: 0.5;
+        }
+        .header-progress {
+            position: absolute; bottom: 0; left: 0;
+            height: 2px;
+            background: var(--accent-primary-gradient);
+            width: 0%;
+            transition: width 0.1s linear;
+            z-index: 1;
+        }
+        .header-emblem {
+            width: 36px; height: 36px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px;
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-right: 14px; flex-shrink: 0;
+            box-shadow: 0 0 12px rgba(91,157,230,0.15);
+            position: relative;
+        }
+        .header-emblem::after {
+            content: '';
+            position: absolute; inset: -3px;
+            border-radius: 50%;
+            border: 1px solid rgba(91,157,230,0.1);
+        }
+        .header-title { font-size: 14px; font-weight: 600; color: var(--text-primary); letter-spacing: 0.3px; }
+        .header-subtitle {
+            font-size: 11px; color: var(--text-muted);
+            margin-left: 16px; padding-left: 16px;
+            border-left: 1px solid var(--border-light);
+            letter-spacing: 0.2px;
+        }
+        .header-badge {
+            margin-left: auto;
+            background: var(--accent-primary-glow2);
+            border: 1px solid var(--accent-primary-border);
+            color: var(--accent-primary);
+            padding: 4px 14px; border-radius: 20px;
+            font-size: 9.5px; font-weight: 600;
+            letter-spacing: 1.2px; text-transform: uppercase;
+        }
+        .header-search {
+            margin-left: auto; position: relative; margin-right: 16px;
+        }
+        .header-search input {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            padding: 7px 12px 7px 34px;
+            color: var(--text-primary); font-size: 13px;
+            width: 240px; outline: none;
+            transition: all var(--transition-normal);
+        }
+        .header-search input:focus {
+            border-color: var(--accent-primary-border);
+            background: rgba(255,255,255,0.06);
+            width: 300px;
+            box-shadow: 0 0 0 3px rgba(91,157,230,0.08);
+        }
+        .header-search input::placeholder { color: var(--text-muted); }
+        .header-search .search-icon {
+            position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+            color: var(--text-muted); font-size: 14px; pointer-events: none;
+        }
+        .header-search .search-kbd {
+            position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border-light);
+            border-radius: 4px; padding: 1px 6px;
+            font-size: 10px; color: var(--text-muted); font-family: inherit;
+        }
+        .header-search.has-results .search-kbd { display: none; }
+        .search-nav { display: none; align-items: center; gap: 4px; margin-left: 8px; }
+        .search-nav.visible { display: flex; }
+        .search-nav button {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-light);
+            border-radius: 4px; padding: 4px 8px;
+            color: var(--text-secondary); cursor: pointer;
+            font-size: 12px; transition: all var(--transition-fast);
+        }
+        .search-nav button:hover { background: rgba(255,255,255,0.08); color: var(--text-primary); }
+        .search-count { font-size: 11px; color: var(--text-muted); min-width: 50px; text-align: center; }
+        .search-close {
+            background: none; border: none; color: var(--text-muted);
+            cursor: pointer; font-size: 16px; padding: 2px 6px;
+            border-radius: 3px; transition: all var(--transition-fast);
+        }
+        .search-close:hover { background: rgba(255,255,255,0.06); color: var(--text-primary); }
+        mark.search-highlight {
+            background: rgba(91, 157, 230, 0.25);
+            color: var(--accent-primary-light);
+            padding: 1px 4px; border-radius: 3px;
+        }
+        mark.search-current {
+            background: rgba(91, 157, 230, 0.5);
+            color: #fff; padding: 1px 4px; border-radius: 3px;
+            box-shadow: 0 0 6px rgba(91,157,230,0.3);
+        }
+        .search-dim { opacity: 0.12; transition: opacity var(--transition-normal); }
+        .search-section-match { opacity: 1 !important; }
+
+        .sidebar {
+            position: fixed; top: var(--header-height); left: 0; bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto; z-index: 900; padding: 12px 0;
+        }
+        .sidebar::before {
+            content: '';
+            position: absolute; top: 0; right: 0; bottom: 0; width: 1px;
+            background: linear-gradient(180deg, var(--accent-primary-border), transparent 30%, transparent 70%, var(--accent-primary-border));
+            opacity: 0.3;
+        }
+        .sidebar-group { padding: 0 12px; margin-bottom: 4px; }
+        .sidebar-group-toggle {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; padding: 8px 12px;
+            background: none; border: none;
+            color: var(--text-muted);
+            font-size: 9.5px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            cursor: pointer; transition: color var(--transition-fast);
+            border-radius: var(--radius-sm);
+        }
+        .sidebar-group-toggle:hover { color: var(--text-secondary); background: rgba(255,255,255,0.02); }
+        .sidebar-group-toggle .toggle-arrow { transition: transform var(--transition-fast); font-size: 10px; }
+        .sidebar-group.collapsed .toggle-arrow { transform: rotate(-90deg); }
+        .sidebar-group-links { overflow: hidden; max-height: 600px; transition: max-height 0.25s ease; }
+        .sidebar-group.collapsed .sidebar-group-links { max-height: 0; }
+        .sidebar-divider { height: 1px; background: var(--border-color); margin: 10px 16px; }
+        .sidebar-link {
+            display: flex; align-items: center;
+            padding: 7px 12px;
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 12.5px;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            gap: 8px; position: relative;
+        }
+        .sidebar-link::before {
+            content: '';
+            position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+            width: 2px; height: 0;
+            background: var(--accent-primary);
+            border-radius: 1px;
+            transition: height var(--transition-normal);
+        }
+        .sidebar-link:hover { background: rgba(255,255,255,0.03); color: var(--text-primary); }
+        .sidebar-link.active { background: var(--accent-primary-glow2); color: var(--accent-primary); }
+        .sidebar-link.active::before {
+            height: 60%;
+            animation: activePulse 2s ease-in-out infinite;
+        }
+        @keyframes activePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .sidebar-link .num {
+            font-size: 10px; font-weight: 600;
+            color: var(--text-muted); min-width: 22px;
+            font-variant-numeric: tabular-nums;
+        }
+        .sidebar-link.active .num { color: var(--accent-primary-dim); }
+
+        .main {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+            position: relative; z-index: 1;
+        }
+        .content {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 40px 48px 100px;
+            animation: contentFadeIn 0.6s ease 3.6s both;
+        }
+        @keyframes contentFadeIn {
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-title {
+            margin-bottom: 48px; padding-bottom: 28px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+        .page-title::after {
+            content: '';
+            position: absolute; bottom: -1px; left: 0;
+            width: 80px; height: 1px;
+            background: var(--accent-primary);
+        }
+        .page-title h1 {
+            font-size: 30px; font-weight: 200;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: var(--text-primary); margin-bottom: 8px;
+        }
+        .page-title h1 strong {
+            font-weight: 700;
+            background: var(--accent-primary-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-title .desc { font-size: 13px; color: var(--text-muted); letter-spacing: 0.2px; }
+
+        .section {
+            margin-bottom: 56px;
+            scroll-margin-top: calc(var(--header-height) + 24px);
+            opacity: 0; transform: translateY(16px);
+            animation: sectionFadeIn 0.6s ease forwards;
+        }
+        .section.animate-in { opacity: 1; transform: translateY(0); }
+        .section.search-dim { opacity: 0.12 !important; transform: none !important; }
+        @keyframes sectionFadeIn { to { opacity: 1; transform: translateY(0); } }
+
+        .section-header {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 24px; padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute; bottom: -1px; left: 0;
+            width: 48px; height: 1px;
+            background: var(--accent-primary); opacity: 0.6;
+        }
+        .section-num {
+            font-size: 10px; font-weight: 700;
+            color: var(--accent-primary);
+            background: var(--accent-primary-glow2);
+            border: 1px solid var(--accent-primary-border);
+            padding: 4px 12px; border-radius: 20px;
+            letter-spacing: 1.2px;
+            transition: all var(--transition-normal);
+        }
+        .section:hover .section-header .section-num {
+            background: var(--accent-primary-glow);
+            box-shadow: 0 0 10px rgba(91,157,230,0.1);
+        }
+        .section-title {
+            font-size: 17px; font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase; letter-spacing: 0.6px;
+        }
+
+        .subsection { margin-bottom: 28px; }
+        .subsection h3 {
+            font-size: 13.5px; font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 12px; padding-left: 14px;
+            border-left: 2px solid var(--accent-primary-border);
+            letter-spacing: 0.2px;
+        }
+        .subsection p, .subsection ul, .subsection ol {
+            color: var(--text-secondary); font-size: 13px; line-height: 1.75;
+        }
+        .subsection ul, .subsection ol { padding-left: 20px; }
+        .subsection li { margin-bottom: 5px; }
+
+        .table-wrap {
+            overflow-x: auto; margin: 14px 0 24px;
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-normal);
+        }
+        .table-wrap:hover { box-shadow: var(--shadow-md); }
+        table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+        thead th {
+            background: rgba(255,255,255,0.03);
+            color: var(--text-secondary);
+            font-weight: 600; font-size: 10px;
+            text-transform: uppercase; letter-spacing: 1px;
+            padding: 12px 16px; text-align: left;
+            border-bottom: 1px solid var(--border-card);
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary); vertical-align: top;
+            transition: background var(--transition-fast);
+        }
+        tbody tr:nth-child(even) { background: rgba(255,255,255,0.008); }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover td { background: rgba(91,157,230,0.04); }
+        tbody td:first-child {
+            font-weight: 600; color: var(--text-primary);
+            white-space: nowrap; font-variant-numeric: tabular-nums;
+        }
+
+        .star {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 3px 10px; border-radius: 20px;
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.5px; transition: all var(--transition-fast);
+        }
+        .star:hover { transform: scale(1.05); }
+        .star-1 { background: rgba(77,191,110,0.12); color: #5ddb80; }
+        .star-2 { background: rgba(77,191,110,0.18); color: #72e094; }
+        .star-3 { background: rgba(255,193,7,0.12); color: #ffd142; }
+        .star-4 { background: rgba(255,152,0,0.12); color: #ffaa33; }
+        .star-5 { background: rgba(217,76,76,0.12); color: #e86666; }
+
+        .jur {
+            display: inline-flex; align-items: center;
+            padding: 3px 10px; border-radius: 20px;
+            font-size: 10px; font-weight: 600;
+            letter-spacing: 0.5px; transition: all var(--transition-fast);
+        }
+        .jur:hover { transform: scale(1.05); }
+        .jur-f { background: var(--accent-primary-glow2); color: var(--accent-primary); }
+        .jur-r { background: var(--accent-green-soft); color: var(--accent-green); }
+        .jur-fr { background: rgba(167,139,250,0.1); color: #a78bfa; }
+        .jur-fin { background: var(--accent-gold-glow2); color: var(--accent-gold); }
+        .jur-mil { background: rgba(121,85,72,0.15); color: #b89888; }
+
+        .checklist { list-style: none; padding: 0; }
+        .checklist li { padding: 7px 0 7px 26px; position: relative; transition: color var(--transition-fast); }
+        .checklist li::before {
+            content: '';
+            position: absolute; left: 0; top: 13px;
+            width: 16px; height: 16px;
+            border: 1.5px solid var(--border-light);
+            border-radius: 4px; transition: all var(--transition-fast);
+        }
+        .checklist li:hover { color: var(--text-primary); }
+        .checklist li:hover::before {
+            border-color: var(--accent-primary-border);
+            background: var(--accent-primary-glow2);
+        }
+
+        .steps { list-style: none; padding: 0; counter-reset: step; }
+        .steps li { counter-increment: step; padding: 10px 0 10px 42px; position: relative; }
+        .steps li::before {
+            content: counter(step);
+            position: absolute; left: 0; top: 7px;
+            width: 28px; height: 28px;
+            background: var(--accent-primary-glow2);
+            border: 1px solid var(--accent-primary-border);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11.5px; font-weight: 700;
+            color: var(--accent-primary);
+            font-variant-numeric: tabular-nums;
+            transition: all var(--transition-normal);
+        }
+        .steps li:hover::before {
+            background: var(--accent-primary-glow);
+            box-shadow: 0 0 10px rgba(91,157,230,0.15);
+        }
+
+        .alert {
+            padding: 14px 18px; border-radius: var(--radius-md);
+            margin: 14px 0 20px; font-size: 13px;
+            border-left: 3px solid;
+            position: relative; overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        .alert:hover { transform: translateX(4px); }
+        .alert-gold { background: var(--accent-gold-glow2); border-color: var(--accent-gold); color: var(--text-secondary); }
+        .alert-red { background: var(--accent-red-soft); border-color: var(--accent-red); color: #e88888; }
+        .alert-green { background: var(--accent-green-soft); border-color: var(--accent-green); color: #82d9a0; }
+        .alert-blue { background: var(--accent-primary-glow2); border-color: var(--accent-primary); color: #8cb8e0; }
+        .alert strong { color: var(--text-primary); }
+        .alert-title {
+            font-weight: 700; font-size: 10.5px;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 14px; margin: 18px 0 28px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            transition: all var(--transition-normal);
+            position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--accent-primary-gradient);
+            opacity: 0; transition: opacity var(--transition-normal);
+        }
+        .card::after {
+            content: '';
+            position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at center, rgba(91,157,230,0.04) 0%, transparent 70%);
+            opacity: 0; transition: opacity var(--transition-slow);
+            pointer-events: none;
+        }
+        .card:hover {
+            border-color: var(--accent-primary-border);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md), 0 0 20px rgba(91,157,230,0.06);
+        }
+        .card:hover::before, .card:hover::after { opacity: 1; }
+        .card-label {
+            font-size: 9.5px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.2px;
+            color: var(--text-muted); margin-bottom: 8px;
+        }
+        .card-value {
+            font-size: 24px; font-weight: 700;
+            background: var(--accent-primary-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-desc { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+        .scenario {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            margin: 14px 0 18px; overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+        .scenario:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        .scenario-header {
+            background: rgba(255,255,255,0.02);
+            padding: 11px 18px;
+            font-size: 11.5px; font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase; letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .scenario-body { padding: 16px 18px; }
+        .scenario-body ol, .scenario-body ul { padding-left: 18px; }
+        .scenario-body li {
+            color: var(--text-secondary); font-size: 12.5px;
+            margin-bottom: 5px; line-height: 1.65;
+        }
+
+        .miranda {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-primary-border);
+            border-radius: var(--radius-md);
+            padding: 24px; margin: 18px 0 28px;
+            text-align: center; position: relative; overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        .miranda:hover { box-shadow: var(--shadow-md), 0 0 24px rgba(91,157,230,0.06); }
+        .miranda::before, .miranda::after {
+            content: '\201C';
+            position: absolute; font-size: 80px;
+            color: var(--accent-primary); opacity: 0.06;
+            font-family: Georgia, serif; line-height: 1;
+        }
+        .miranda::before { top: -10px; left: 16px; }
+        .miranda::after { content: '\201D'; bottom: -30px; right: 16px; }
+        .miranda-label {
+            font-size: 10px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2.5px;
+            color: var(--accent-primary); margin-bottom: 14px;
+        }
+        .miranda-text {
+            font-size: 14px; font-style: italic;
+            color: var(--text-primary); line-height: 1.85;
+            position: relative; z-index: 1;
+        }
+
+        strong { color: var(--text-primary); }
+        em { color: var(--text-secondary); font-style: italic; }
+        code {
+            background: rgba(255,255,255,0.06);
+            padding: 2px 8px; border-radius: 4px;
+            font-size: 12px; color: var(--accent-primary-light);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all var(--transition-fast);
+        }
+        code:hover { background: rgba(255,255,255,0.08); border-color: var(--accent-primary-border); }
+
+        .arrow-flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+        .arrow-flow .step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            padding: 6px 14px; border-radius: var(--radius-sm);
+            font-size: 12px; font-weight: 500;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            position: relative; overflow: hidden;
+        }
+        .arrow-flow .step:hover {
+            border-color: var(--border-light);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+        .arrow-flow .step.gold {
+            border-color: var(--accent-primary-border);
+            background: var(--accent-primary-glow2);
+            color: var(--accent-primary);
+        }
+        .arrow-flow .step.gold:hover {
+            background: var(--accent-primary-glow);
+            box-shadow: 0 0 12px rgba(91,157,230,0.08);
+        }
+        .arrow-flow .arrow { color: var(--text-muted); font-size: 14px; }
+
+        details {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 8px; overflow: hidden;
+            scroll-margin-top: calc(var(--header-height) + 24px);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+        details:hover { border-color: var(--border-light); box-shadow: var(--shadow-sm), 0 0 16px rgba(0,0,0,0.15); }
+        details[open] { border-color: var(--accent-primary-border); box-shadow: var(--shadow-md), 0 0 20px rgba(91,157,230,0.04); }
+        summary {
+            padding: 13px 18px; cursor: pointer;
+            font-size: 13px; font-weight: 600;
+            color: var(--text-secondary);
+            user-select: none; list-style: none;
+            display: flex; align-items: center; gap: 10px;
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+        summary::after {
+            content: '';
+            position: absolute; bottom: 0; left: 18px; right: 18px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+            opacity: 0; transition: opacity var(--transition-fast);
+        }
+        details[open] summary::after { opacity: 1; }
+        summary:hover { background: rgba(255,255,255,0.02); color: var(--text-primary); }
+        summary::-webkit-details-marker { display: none; }
+        summary::before {
+            content: '+';
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-light);
+            font-size: 14px; font-weight: 300;
+            color: var(--text-muted);
+            transition: all var(--transition-fast);
+            flex-shrink: 0; position: relative;
+        }
+        details[open] summary::before {
+            content: '\2212';
+            background: var(--accent-primary-glow2);
+            border-color: var(--accent-primary-border);
+            color: var(--accent-primary);
+            transform: rotate(90deg);
+        }
+        details .detail-body { padding: 0 18px 16px; animation: detailBodyIn 0.25s ease; }
+        @keyframes detailBodyIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tree { padding: 0; list-style: none; margin: 14px 0; }
+        .tree li {
+            position: relative; padding-left: 24px;
+            margin-bottom: 8px;
+            color: var(--text-secondary); font-size: 13px;
+            transition: color var(--transition-fast);
+        }
+        .tree li:hover { color: var(--text-primary); }
+        .tree li::before {
+            content: '';
+            position: absolute; left: 0; top: 10px;
+            width: 14px; height: 1px;
+            background: var(--border-light);
+        }
+        .tree li::after {
+            content: '';
+            position: absolute; left: 0; top: -8px; bottom: 10px;
+            width: 1px; background: var(--border-color);
+        }
+        .tree li:last-child::after { display: none; }
+        .tree li strong { color: var(--text-primary); }
+
+        .back-to-top {
+            position: fixed; bottom: 32px; right: 32px;
+            width: 42px; height: 42px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            opacity: 0; visibility: hidden;
+            transition: all var(--transition-normal);
+            z-index: 800;
+            color: var(--text-muted); font-size: 16px;
+            box-shadow: var(--shadow-md);
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .back-to-top:hover {
+            background: var(--bg-card-hover);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary-border);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md), 0 0 16px rgba(91,157,230,0.08);
+        }
+
+        .tip {
+            display: inline-block; position: relative;
+            cursor: help;
+            border-bottom: 1px dotted var(--text-muted);
+            color: var(--text-secondary);
+        }
+        .tip:hover::after {
+            content: attr(data-tip);
+            position: absolute; bottom: calc(100% + 8px); left: 50%;
+            transform: translateY(4px);
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            padding: 8px 14px; font-size: 11px; line-height: 1.5;
+            color: var(--text-secondary); white-space: nowrap;
+            z-index: 100; box-shadow: var(--shadow-lg);
+            opacity: 0; animation: tooltipIn 0.15s ease forwards;
+        }
+        @keyframes tooltipIn { to { opacity: 1; transform: translateY(0); } }
+
+        .donate-box {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-primary-border);
+            border-radius: var(--radius-lg);
+            padding: 24px 28px; text-align: center;
+            margin: 40px auto 0; max-width: 420px;
+            box-shadow: var(--shadow-sm);
+            position: relative; overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        .donate-box:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md), 0 0 30px rgba(91,157,230,0.08);
+        }
+        .donate-box::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 2px; background: var(--accent-primary-gradient);
+        }
+        .donate-box .donate-label {
+            font-size: 10px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2.5px;
+            color: var(--accent-primary); margin-bottom: 10px;
+        }
+        .donate-box .donate-text { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; }
+        .donate-box .donate-number {
+            font-size: 26px; font-weight: 700;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            background: var(--accent-primary-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            transition: all var(--transition-normal);
+        }
+        .donate-box:hover .donate-number { letter-spacing: 5px; }
+
+        .footer {
+            padding: 32px 48px;
+            border-top: 1px solid var(--border-color);
+            text-align: center; color: var(--text-muted);
+            font-size: 11px;
+            margin-left: var(--sidebar-width);
+            position: relative; z-index: 1;
+        }
+
+        @keyframes goldShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        .page-title h1 strong, .card-value {
+            background-size: 200% 100%;
+            animation: goldShimmer 4s ease-in-out infinite;
+        }
+
+        .section + .section::before {
+            content: '';
+            position: absolute; top: -28px; left: 50%;
+            transform: translateX(-50%);
+            width: 60px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+        }
+
+        /* INTRO */
+        .intro-overlay {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: var(--bg-primary);
+            z-index: 10000;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            animation: introFadeOut 0.8s ease 3.2s forwards;
+            pointer-events: none;
+        }
+        .intro-overlay::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at center, rgba(91,157,230,0.06) 0%, transparent 70%);
+            animation: introPulseGlow 2s ease-in-out infinite;
+        }
+        .intro-overlay::after {
+            content: '';
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px; height: 300px;
+            border: 1px solid rgba(91,157,230,0.06);
+            border-radius: 50%;
+            animation: introRingExpand 3s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes introPulseGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        @keyframes introRingExpand { 0% { width: 90px; height: 90px; opacity: 0.8; } 100% { width: 500px; height: 500px; opacity: 0; } }
+        .intro-emblem {
+            width: 90px; height: 90px;
+            border: 3px solid var(--accent-primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 40px; color: var(--accent-primary);
+            animation: introPulse 1s ease-in-out;
+            margin-bottom: 36px;
+            box-shadow: 0 0 40px rgba(91,157,230,0.15), 0 0 80px rgba(91,157,230,0.05);
+            position: relative;
+        }
+        .intro-emblem::before {
+            content: '';
+            position: absolute; inset: -12px;
+            border-radius: 50%;
+            border: 1px solid rgba(91,157,230,0.08);
+            animation: emblemRing 2s ease-in-out infinite;
+        }
+        .intro-emblem::after {
+            content: '';
+            position: absolute; inset: -6px;
+            border-radius: 50%;
+            border: 1px solid rgba(91,157,230,0.1);
+        }
+        @keyframes emblemRing { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.5; } }
+        .intro-title {
+            font-size: 16px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 10px;
+            color: var(--accent-primary);
+            opacity: 0; animation: introReveal 0.8s ease 0.6s forwards;
+        }
+        .intro-subtitle {
+            font-size: 11px; font-weight: 400;
+            text-transform: uppercase; letter-spacing: 5px;
+            color: var(--text-muted);
+            margin-top: 14px;
+            opacity: 0; animation: introReveal 0.8s ease 1.2s forwards;
+        }
+        .intro-line {
+            width: 80px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            margin-top: 24px;
+            opacity: 0; animation: introReveal 0.6s ease 1.8s forwards;
+        }
+        .intro-credit {
+            font-size: 10px; letter-spacing: 2.5px;
+            color: var(--text-muted);
+            margin-top: 18px;
+            opacity: 0; animation: introReveal 0.6s ease 2.2s forwards;
+        }
+        .intro-credit strong { color: var(--accent-primary); font-weight: 600; }
+        .intro-server {
+            font-size: 10px; letter-spacing: 2.5px;
+            color: var(--text-muted);
+            margin-top: 7px;
+            opacity: 0; animation: introReveal 0.6s ease 2.5s forwards;
+        }
+        @keyframes introPulse { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes introReveal { 0% { opacity: 0; transform: translateY(10px); filter: blur(4px); } 100% { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        @keyframes introFadeOut { 0% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; } }
+
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; }
+            .content { padding: 24px 18px 60px; }
+            .footer { margin-left: 0; padding: 24px 18px; }
+            .cards { grid-template-columns: repeat(2, 1fr); }
+            .header-subtitle { display: none; }
+            .header-badge { display: none; }
+            .header-search input { width: 130px; }
+            .header-search input:focus { width: 170px; }
+        }
+        @media print {
+            .sidebar, .header, .back-to-top { display: none; }
+            .main { margin: 0; }
+            body { background: #fff; color: #000; }
+            body::before { display: none; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="intro-overlay" id="introOverlay">
+    <div class="intro-emblem">&#9733;</div>
+    <div class="intro-title">LSPD</div>
+    <div class="intro-subtitle">Los Santos Police Department</div>
+    <div class="intro-line"></div>
+    <div class="intro-credit">Created by <strong>Egor Mortez</strong></div>
+    <div class="intro-server">Памятка для сервера New York</div>
+</div>
+
+<header class="header">
+    <div class="header-emblem">&#9733;</div>
+    <div class="header-title">Памятка <span style="color:var(--accent-primary);font-weight:700">LSPD</span></div>
+    <div class="header-subtitle">Los Santos Police Department &#8212; New York</div>
+    <div class="header-search" id="headerSearch">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="searchInput" placeholder="Поиск по памятке..." autocomplete="off" spellcheck="false">
+        <span class="search-kbd">Ctrl+K</span>
+        <div class="search-nav" id="searchNav">
+            <button id="searchPrev" title="Предыдущий">&#9650;</button>
+            <span class="search-count" id="searchCount">0 / 0</span>
+            <button id="searchNext" title="Следующий">&#9660;</button>
+            <button class="search-close" id="searchClose" title="Закрыть">&#10005;</button>
+        </div>
+    </div>
+    <div class="header-badge">To Protect and Serve</div>
+</header>
+
+<nav class="sidebar">
+    <div class="sidebar-group">
+        <button class="sidebar-group-toggle">Общее <span class="toggle-arrow">&#9662;</span></button>
+        <div class="sidebar-group-links">
+            <a href="#quick" class="sidebar-link active"><span class="num">00</span> Быстрый справочник</a>
+        </div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-group">
+        <button class="sidebar-group-toggle">Процедуры <span class="toggle-arrow">&#9662;</span></button>
+        <div class="sidebar-group-links">
+            <a href="#detention" class="sidebar-link"><span class="num">I</span> Задержание</a>
+            <a href="#arrest" class="sidebar-link"><span class="num">II</span> Арест</a>
+            <a href="#search" class="sidebar-link"><span class="num">III</span> Обыск</a>
+            <a href="#evidence" class="sidebar-link"><span class="num">IV</span> Доказательства</a>
+        </div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-group">
+        <button class="sidebar-group-toggle">Применение силы <span class="toggle-arrow">&#9662;</span></button>
+        <div class="sidebar-group-links">
+            <a href="#force" class="sidebar-link"><span class="num">V</span> Стадии силы</a>
+            <a href="#weapons" class="sidebar-link"><span class="num">VI</span> Огнестрельное оружие</a>
+        </div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-group">
+        <button class="sidebar-group-toggle">Уголовный кодекс <span class="toggle-arrow">&#9662;</span></button>
+        <div class="sidebar-group-links">
+            <a href="#ch6" class="sidebar-link"><span class="num">VI</span> Жизнь и здоровье</a>
+            <a href="#ch7" class="sidebar-link"><span class="num">VII</span> Свобода и честь</a>
+            <a href="#ch10" class="sidebar-link"><span class="num">X</span> Собственность</a>
+            <a href="#ch12" class="sidebar-link"><span class="num">XII</span> Общ. безопасность</a>
+            <a href="#ch16" class="sidebar-link"><span class="num">XVI</span> Правосудие</a>
+            <a href="#ch17" class="sidebar-link"><span class="num">XVII</span> Управление</a>
+        </div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-group">
+        <button class="sidebar-group-toggle">Административный <span class="toggle-arrow">&#9662;</span></button>
+        <div class="sidebar-group-links">
+            <a href="#admin" class="sidebar-link"><span class="num">XX</span> Все правонарушения</a>
+        </div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-group">
+        <button class="sidebar-group-toggle">Дополнительно <span class="toggle-arrow">&#9662;</span></button>
+        <div class="sidebar-group-links">
+            <a href="#statute" class="sidebar-link"><span class="num">&#8212;</span> Сроки давности</a>
+            <a href="#wanted" class="sidebar-link"><span class="num">&#8212;</span> Розыск и залог</a>
+            <a href="#circumstances" class="sidebar-link"><span class="num">&#8212;</span> Обстоятельства</a>
+        </div>
+    </div>
+</nav>
+
+<main class="main">
+<div class="content">
+
+<div class="page-title">
+    <h1>Памятка <strong>LSPD</strong></h1>
+    <div class="desc">Практическое руководство для сотрудников Los Santos Police Department &#8212; Majestic RP</div>
+</div>
+
+<!-- QUICK REF -->
+<div class="section" id="quick">
+    <div class="section-header">
+        <span class="section-num">00</span>
+        <span class="section-title">Быстрый справочник</span>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-label">Срок задержания</div>
+            <div class="card-value">60 мин</div>
+            <div class="card-desc">Максимальный срок</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Срок давности</div>
+            <div class="card-value">25 дн.</div>
+            <div class="card-desc">Общий срок</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Мин. залог</div>
+            <div class="card-value">$25K</div>
+            <div class="card-desc">+ $25K за каждую ★</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Допрос</div>
+            <div class="card-value">1 час</div>
+            <div class="card-desc">Макс. длительность</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Звонок адвоката</div>
+            <div class="card-value">3 мин</div>
+            <div class="card-desc">Только частному</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Конф. беседа</div>
+            <div class="card-value">10 мин</div>
+            <div class="card-desc">С адвокатом</div>
+        </div>
+    </div>
+
+    <div class="miranda">
+        <div class="miranda-label">Правило Миранды — зачитать при задержании</div>
+        <div class="miranda-text">«Вы имеете право хранить молчание. Всё, что вы скажете, может и будет использовано против Вас в суде. Вы имеете право на один телефонный звонок. Также Вы имеете право на адвоката, частного и государственного. Вы понимаете свои права?»</div>
+    </div>
+
+    <div class="alert alert-blue">
+        <div class="alert-title">Основание</div>
+        <strong>ПК ст. 3.2 ч.2</strong> — Лицо может быть задержано при наличии хотя бы одного из оснований: застигнуто на месте, обнаружены следы, 3+ свидетелей, фото/видео фиксация, ордер, требование ГП/Губернатора, ориентировка, нахождение в розыске.
+    </div>
+</div>
+
+<!-- DETENTION -->
+<div class="section" id="detention">
+    <div class="section-header">
+        <span class="section-num">I</span>
+        <span class="section-title">Процедура задержания</span>
+    </div>
+
+    <div class="alert alert-blue">
+        <strong>Задержание</strong> — мера кратковременного (до 1 часа) лишения свободы. Не является наказанием, носит внесудебный характер.
+    </div>
+
+    <div class="subsection">
+        <h3>Основания задержания (ПК ст. 3.2 ч.2)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>№</th><th>Основание</th><th>Примечание</th></tr></thead>
+                <tbody>
+                    <tr><td>а</td><td>Лицо застигнуто в момент правонарушения</td><td>Государственным служащим</td></tr>
+                    <tr><td>б</td><td>Обнаружены явные следы на лице/одежде/в жилище</td><td>—</td></tr>
+                    <tr><td>в</td><td><strong>3+ свидетелей</strong> указывают на лицо</td><td><strong>НЕ могут:</strong> родственники, знакомые, коллеги</td></tr>
+                    <tr><td>г</td><td>Фото или видео фиксация правонарушения</td><td>—</td></tr>
+                    <tr><td>д</td><td>Ордер на задержание</td><td>—</td></tr>
+                    <tr><td>е</td><td>Требование Губернатора / Генпрокурора</td><td>—</td></tr>
+                    <tr><td>ж</td><td>Ориентировка на ТС или лицо</td><td>—</td></tr>
+                    <tr><td>з</td><td>Лицо находится в розыске</td><td>—</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Порядок задержания (ПК ст. 3.3)</h3>
+        <ol class="steps">
+            <li>Надеть <strong>наручники</strong> на подозреваемого</li>
+            <li>Предъявить <strong>удостоверение</strong> / жетон / бейдж</li>
+            <li>На усмотрение — <strong>первичный обыск</strong></li>
+            <li>Разъяснить <strong>квалификацию</strong> и <strong>зачитать правило Миранды</strong></li>
+            <li>Провести <strong>идентификацию</strong>, проверку по базе розыска</li>
+            <li>Доставить в <strong>участок / департамент шерифа / штаб-квартиру FIB</strong></li>
+            <li>Реализовать <strong>права задержанного</strong></li>
+            <li>Провести <strong>следственные действия</strong> (допрос, экспертиза)</li>
+        </ol>
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Задержание госслужащего (ПК ст. 3.5)</div>
+        <div class="scenario-body">
+            <ol>
+                <li>Вызвать <strong>руководство задержанного</strong> + <strong>сотрудника ОГП</strong></li>
+                <li>Заморозить срок: до <strong>9 мин</strong> (ожидание), до <strong>15 мин</strong> (при ответе прокурора)</li>
+                <li>По прибытии прокурора — представить <strong>доказательства</strong></li>
+                <li>Прокурор оценивает правомерность → если нет состава → <strong>освобождение</strong></li>
+                <li>Лишение свободы → работодатель <strong>обязан уволить</strong></li>
+                <li>Если прокурор не может прибыть → <strong>освобождение</strong>, обращение в ОГП за 1 час</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Скрытие личности (ПК ст. 3.2 ч.3)</h3>
+        <div class="alert alert-red">
+            <div class="alert-title">⚠ Процедура</div>
+            Если лицо в маске/капюшоне/шлеме — потребовать снятия. <strong>Отказ</strong> → надеть наручники, разъяснить основания, провести установление личности через базы данных, сверить с фотороботом, провести обыск.
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Заморозка срока</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Ситуация</th><th>Длительность</th><th>Основание</th></tr></thead>
+                <tbody>
+                    <tr><td>Ожидание ответа адвоката</td><td><strong>+3 мин</strong></td><td>ПК ст. 3.3 ч.4</td></tr>
+                    <tr><td>Ожидание прибытия адвоката</td><td><strong>+8 мин</strong></td><td>ПК ст. 3.3 ч.4</td></tr>
+                    <tr><td>Вызов руководства + прокурора</td><td><strong>до 9–15 мин</strong></td><td>ПК ст. 3.5 ч.1</td></tr>
+                    <tr><td>Просмотр видеофиксации</td><td><strong>до 10 мин</strong></td><td>ПК ст. 3.6 ч.2</td></tr>
+                    <tr><td>Допрос, экспертиза, обыск</td><td><strong>Приостанавливается</strong></td><td>ПК ст. 3.6 ч.2</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Основания освобождения (ПК ст. 3.6 ч.1)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>№</th><th>Основание</th></tr></thead>
+                <tbody>
+                    <tr><td>а</td><td>Не подтвердилось подозрение</td></tr>
+                    <tr><td>б</td><td>Нет наказания в виде лишения свободы</td></tr>
+                    <tr><td>в</td><td>Задержание с нарушением (нет оснований)</td></tr>
+                    <tr><td>г</td><td>Прошло больше <strong>1 часа</strong> без избрания меры</td></tr>
+                    <tr><td>д</td><td>Статус <strong>неприкосновенности</strong> (кроме угрозы жизни)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Права задержанного</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Право</th><th>Описание</th></tr></thead>
+                <tbody>
+                    <tr><td>Телефонный звонок</td><td>1 звонок до <strong>3 мин</strong> — только частному адвокату</td></tr>
+                    <tr><td>Адвокат</td><td>Частный или государственный</td></tr>
+                    <tr><td>Молчание</td><td>Право не давать показаний</td></tr>
+                    <tr><td>Конфиденциальная встреча</td><td>С адвокатом, до <strong>10 минут</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="alert alert-gold">
+        <div class="alert-title">Обязанности сотрудника (ПК ст. 3.9)</div>
+        1. Вести <strong>видеозапись</strong> задержания<br>
+        2. Разъяснить адвокату/прокурору причины задержания<br>
+        3. Предоставить <strong>доказательства</strong> по требованию<br>
+        4. При задержании по БД — приобщить доказательства невиновности
+    </div>
+</div>
+
+<!-- ARREST -->
+<div class="section" id="arrest">
+    <div class="section-header">
+        <span class="section-num">II</span>
+        <span class="section-title">Порядок ареста (ПК ст. 4)</span>
+    </div>
+
+    <ol class="steps">
+        <li>Провести <strong>вторичный обыск</strong></li>
+        <li><strong>Изъять</strong> все нелегальные предметы</li>
+        <li>Установить <strong>соответствующий уровень розыска</strong></li>
+        <li>Разъяснить задержанному <strong>причину ареста</strong></li>
+        <li>Поместить в <strong>КПЗ</strong> на установленный срок</li>
+    </ol>
+
+    <div class="alert alert-blue">
+        <div class="alert-title">Передача дела (ПК ст. 16.4)</div>
+        Если сотрудник не может продолжать расследование — передать уполномоченному сотруднику с изложением обстоятельств + передать задержанного.
+    </div>
+</div>
+
+<!-- SEARCH -->
+<div class="section" id="search">
+    <div class="section-header">
+        <span class="section-num">III</span>
+        <span class="section-title">Обыск</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Обыск жилища (ПК ст. 1.4 ч.2)</h3>
+        <div class="arrow-flow">
+            <span class="step gold">Согласие проживающих</span>
+            <span class="arrow">или</span>
+            <span class="step gold">Судебный акт / ордер ГП</span>
+        </div>
+        <div class="alert alert-red">
+            <strong>Экстренный случай</strong> — без ордера, но уведомить прокурора <strong>не позднее 1 часа</strong>.
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Обыск нежилого помещения (ПК ст. 1.4 ч.3)</h3>
+        <div class="arrow-flow">
+            <span class="step gold">Суд</span>
+            <span class="arrow">или</span>
+            <span class="step gold">Генпрокурор</span>
+            <span class="arrow">или</span>
+            <span class="step gold">Заместитель ГП</span>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Тайна переписки (ПК ст. 1.5)</h3>
+        <div class="alert alert-blue">
+            Ограничение допускается <strong>только на основании судебного акта</strong>.
+        </div>
+    </div>
+</div>
+
+<!-- EVIDENCE -->
+<div class="section" id="evidence">
+    <div class="section-header">
+        <span class="section-num">IV</span>
+        <span class="section-title">Доказательства</span>
+    </div>
+
+    <div class="subsection">
+        <h3>Допустимые (ПК ст. 2.1)</h3>
+        <ol>
+            <li>Показания подозреваемого, обвиняемого</li>
+            <li>Показания потерпевшего, свидетеля</li>
+            <li>Заключение эксперта / специалиста</li>
+            <li>Вещественные доказательства</li>
+            <li>Протоколы следственных действий</li>
+            <li>Иные документы</li>
+            <li><strong>Автоматически выданная запись в БД</strong></li>
+        </ol>
+    </div>
+
+    <div class="subsection">
+        <h3>Недопустимые (ПК ст. 2.2)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Вид</th><th>Описание</th></tr></thead>
+                <tbody>
+                    <tr><td>До прав Миранды</td><td>Любая информация <strong>ДО зачтения прав</strong></td></tr>
+                    <tr><td>Предположения и слухи</td><td>Без указания источника</td></tr>
+                    <tr><td>Незаконно добытые</td><td>Изъятие без ордера, у неприкосновенного</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="alert alert-gold">
+        <div class="alert-title">Исключение</div>
+        Автоматически выданная запись в БД <strong>в полном объёме доказывает вину</strong>. Обвиняемому необходимо доказать свою невиновность.
+    </div>
+</div>
+
+<!-- FORCE STAGES -->
+<div class="section" id="force">
+    <div class="section-header">
+        <span class="section-num">V</span>
+        <span class="section-title">Стадии применения силы</span>
+    </div>
+
+    <div class="arrow-flow">
+        <span class="step gold">1. Присутствие</span>
+        <span class="arrow">→</span>
+        <span class="step gold">2. Приказ</span>
+        <span class="arrow">→</span>
+        <span class="step gold">3. Физическая сила</span>
+        <span class="arrow">→</span>
+        <span class="step gold">4. Спецсредства</span>
+        <span class="arrow">→</span>
+        <span class="step gold">5. Огнестрельное оружие</span>
+    </div>
+
+    <div class="alert alert-gold">
+        Стадии соблюдаются по порядку. <strong>Исключение:</strong> экстренные ситуации — можно перейти к любой стадии (вооружённый преступник, угроза жизни).
+    </div>
+</div>
+
+<!-- WEAPONS -->
+<div class="section" id="weapons">
+    <div class="section-header">
+        <span class="section-num">VI</span>
+        <span class="section-title">Применение огнестрельного оружия</span>
+    </div>
+
+    <div class="alert alert-red">
+        <div class="alert-title">⚠ Основания</div>
+        Огнестрельное оружие применяется <strong>только</strong> при непосредственной угрозе жизни сотрудника или гражданских лиц. Предупреждение обязательно (кроме случаев, когда промедление создаёт опасность).
+    </div>
+
+    <div class="scenario">
+        <div class="scenario-header">Процедура применения</div>
+        <div class="scenario-body">
+            <ol>
+                <li>Предупредить: <strong>«Полиция! Стоять! Стрелять буду!»</strong></li>
+                <li>Произвести <strong>предупредительный выстрел в воздух</strong> (если позволяет ситуация)</li>
+                <li>Применить оружие <strong>на поражение</strong> при сохранении угрозы</li>
+                <li>Немедленно вызвать <strong>медиков</strong> и <strong>руководство</strong></li>
+                <li>Сохранить <strong>видеозапись</strong> и место происшествия</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- CRIMINAL CODE SECTIONS -->
+<div class="section" id="criminal-code">
+    <div class="section-header">
+        <span class="section-num">—</span>
+        <span class="section-title">Уголовный кодекс — ключевые главы</span>
+    </div>
+
+    <details id="ch6" open>
+        <summary>Глава VI — Жизнь и здоровье</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>6.1 ч.1</td><td><span class="star star-3">★★★</span></td><td>Побои, лёгкие/средние телесные</td><td>3 года</td></tr>
+                        <tr><td>6.1 ч.2</td><td><span class="star star-4">★★★★</span></td><td>Особо тяжкие телесные</td><td>4 года</td></tr>
+                        <tr><td>6.2 ч.1</td><td><span class="star star-4">★★★★</span></td><td>Убийство</td><td>4 года</td></tr>
+                        <tr><td>6.2 ч.2</td><td><span class="star star-3">★★★</span></td><td>Смерть по неосторожности</td><td>3 года</td></tr>
+                        <tr><td>6.3</td><td><span class="star star-5">★★★★★</span></td><td>Тяжкое убийство (2+ лиц, жестокость, по найму)</td><td>5 лет</td></tr>
+                        <tr><td>6.6</td><td><span class="star star-3">★★★</span></td><td>Угроза убийством</td><td>3 года или штраф $20K</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details id="ch7">
+        <summary>Глава VII — Свобода, честь, достоинство</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>7.1</td><td><span class="star star-5">★★★★★</span></td><td>Похищение человека</td><td>5 лет</td></tr>
+                        <tr><td>7.1.1</td><td><span class="star star-4">★★★★</span></td><td>Незаконное лишение свободы</td><td>4 года</td></tr>
+                        <tr><td>7.2</td><td><span class="star star-4">★★★★</span></td><td>Рабский труд</td><td>4 года</td></tr>
+                        <tr><td>7.4</td><td><span class="star star-2">★★/★★★</span></td><td>Клевета</td><td>2–3 года или штраф $20K</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details id="ch10">
+        <summary>Глава X — Собственность</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>10</td><td><span class="star star-1">★</span></td><td>Мелкое хищение (<strong>&lt;$15K</strong>)</td><td>1 год или штраф $20K</td></tr>
+                        <tr><td>10.1</td><td><span class="star star-3">★★★</span></td><td>Кража (<strong>&gt;$15K</strong>)</td><td>3 года</td></tr>
+                        <tr><td>10.2</td><td><span class="star star-3">★★★</span></td><td>Мошенничество</td><td>3 года</td></tr>
+                        <tr><td>10.3</td><td><span class="star star-3">★★★</span></td><td>Грабёж</td><td>3 года</td></tr>
+                        <tr><td>10.4</td><td><span class="star star-4">★★★★</span></td><td>Разбой</td><td>4 года</td></tr>
+                        <tr><td>10.5</td><td><span class="star star-3">★★★</span></td><td>Угон ТС</td><td>3 года</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details id="ch12">
+        <summary>Глава XII — Общественная безопасность</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>12.1</td><td><span class="star star-5">★★★★★</span></td><td>Терроризм</td><td>5 лет</td></tr>
+                        <tr><td>12.4</td><td><span class="star star-5">★★★★★</span></td><td>Экстремизм</td><td>5 лет</td></tr>
+                        <tr><td>12.7</td><td><span class="star star-3">★★★</span></td><td>Проникновение на закрытую территорию</td><td>3 года</td></tr>
+                        <tr><td>12.8</td><td><span class="star star-4">★★★★</span></td><td>Незаконный оборот оружия</td><td>4 года или штраф $20K</td></tr>
+                        <tr><td>12.8.1</td><td><span class="star star-5">★★★★★</span></td><td>Гос. спецсредства у гражданских</td><td>5 лет</td></tr>
+                        <tr><td>12.9</td><td><span class="star star-5">★★★★★</span></td><td>ВВ / ВУ</td><td>5 лет</td></tr>
+                        <tr><td>12.12</td><td><span class="star star-5">★★★★★</span></td><td>Преступное сообщество</td><td>5 лет</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details id="ch16">
+        <summary>Глава XVI — Правосудие</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>16.4</td><td><span class="star star-5">★★★★★</span></td><td>Заведомо незаконное задержание</td><td>5 лет</td></tr>
+                        <tr><td>16.5</td><td><span class="star star-5">★★★★★</span></td><td>Фальсификация доказательств</td><td>5 лет</td></tr>
+                        <tr><td>16.8</td><td><span class="star star-4">★★★★</span></td><td>Ложные показания свидетеля</td><td>4 года</td></tr>
+                        <tr><td>16.11</td><td><span class="star star-4">★★★★</span></td><td>Сокрытие / уничтожение улик</td><td>4 года</td></tr>
+                        <tr><td>16.13</td><td><span class="star star-3">★★★</span></td><td>Ложные показания прокурору</td><td>3 года или штраф $20K</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details id="ch17">
+        <summary>Глава XVII — Управление</summary>
+        <div class="detail-body">
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Статья</th><th>★</th><th>Описание</th><th>Наказание</th></tr></thead>
+                    <tbody>
+                        <tr><td>17.1</td><td><span class="star star-5">★★★★★</span></td><td>Посягательство на жизнь сотрудника ПОО</td><td>5 лет</td></tr>
+                        <tr><td>17.2</td><td><span class="star star-3">★★★</span></td><td>Насилие (не опасное) против сотрудника</td><td>3 года</td></tr>
+                        <tr><td>17.3</td><td><span class="star star-3">★★★</span></td><td>Оскорбление представителя власти</td><td>3 года или штраф $20K</td></tr>
+                        <tr><td>17.4</td><td><span class="star star-3">★★★</span></td><td>Провокация гос. служащего</td><td>3 года или штраф $20K</td></tr>
+                        <tr><td>17.6</td><td><span class="star star-3">★★★</span></td><td>Неповиновение законному требованию</td><td>3 года или штраф $20K</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+</div>
+
+<!-- ADMINISTRATIVE -->
+<div class="section" id="admin">
+    <div class="section-header">
+        <span class="section-num">XX</span>
+        <span class="section-title">Административные правонарушения</span>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Статья</th><th>Описание</th><th>Наказание</th></tr></thead>
+            <tbody>
+                <tr><td>20.1</td><td>Мелкое хулиганство</td><td>$3K–$7K (повторно: $5K–$10K)</td></tr>
+                <tr><td>20.2</td><td>Транспорт внутри госучреждений</td><td>$20K</td></tr>
+                <tr><td>20.3</td><td>Нахождение в неприемлемом виде / опьянение</td><td>$5K–$20K</td></tr>
+                <tr><td>20.4</td><td>Обнажение оружия в неположенном месте</td><td>$15K–$30K + конфискация</td></tr>
+                <tr><td>20.5</td><td>Холодное оружие в людном месте</td><td>$20K</td></tr>
+                <tr><td>20.7</td><td>Безрассудное вождение</td><td>$20K–$30K + лишение лицензии</td></tr>
+                <tr><td>20.8</td><td>Ложный вызов спецслужб</td><td>$10K–$20K</td></tr>
+                <tr><td>20.9</td><td>Неуважение к Сенату</td><td>$15K–$20K</td></tr>
+                <tr><td>21.1</td><td>Дискриминация</td><td>$10K–$20K</td></tr>
+                <tr><td>21.3</td><td>Повреждение чужого имущества</td><td>$15K + возмещение</td></tr>
+                <tr><td>23.1</td><td>Наркотики <strong>&lt;3 грамм</strong></td><td>$5K–$20K</td></tr>
+                <tr><td>26.1</td><td>Оскорбление</td><td>$20K</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- STATUTE OF LIMITATIONS -->
+<div class="section" id="statute">
+    <div class="section-header">
+        <span class="section-num">—</span>
+        <span class="section-title">Сроки давности</span>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-label">Общий срок</div>
+            <div class="card-value">25 дней</div>
+            <div class="card-desc">Со дня совершения</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Федеральный розыск</div>
+            <div class="card-value">∞</div>
+            <div class="card-desc">Срок не применяется</div>
+        </div>
+    </div>
+
+    <div class="alert alert-red">
+        <div class="alert-title">Сроки давности НЕ применяются</div>
+        Ст. 6.1–6.4, 7.1, 8.1, 12.1–12.5, 14.1–14.3.2, 15.1–15.1.1, 16.1, 16.2, 16.4, 16.10, 17.1 + все лица в <strong>федеральном розыске</strong>
+    </div>
+</div>
+
+<!-- WANTED & BAIL -->
+<div class="section" id="wanted">
+    <div class="section-header">
+        <span class="section-num">—</span>
+        <span class="section-title">Розыск и залог</span>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>★</th><th>Категория</th><th>Наказание</th><th>Мин. залог</th></tr></thead>
+            <tbody>
+                <tr><td><span class="star star-1">★</span></td><td>Небольшой тяжести</td><td>До 1 года</td><td>$25K</td></tr>
+                <tr><td><span class="star star-2">★★</span></td><td>Небольшой тяжести</td><td>До 2 лет</td><td>$50K</td></tr>
+                <tr><td><span class="star star-3">★★★</span></td><td>Средней тяжести</td><td>До 3 лет</td><td>$75K</td></tr>
+                <tr><td><span class="star star-4">★★★★</span></td><td>Средней тяжести</td><td>До 4 лет</td><td>$100K</td></tr>
+                <tr><td><span class="star star-5">★★★★★</span></td><td>Тяжкое / особо тяжкое</td><td>Свыше 4 лет</td><td><strong>Нет залога</strong></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-gold">
+        <div class="alert-title">Залог</div>
+        Залог возможен только по статьям <strong>ниже 4 ★</strong>. Минимальный залог — $25K + $25K за каждую звезду.
+    </div>
+</div>
+
+<!-- CIRCUMSTANCES -->
+<div class="section" id="circumstances">
+    <div class="section-header">
+        <span class="section-num">—</span>
+        <span class="section-title">Обстоятельства, исключающие преступность (Глава 4 УАК)</span>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-label">Статья 4</div>
+            <div class="card-value" style="font-size:16px">Необходимая оборона</div>
+            <div class="card-desc">Защита от нападения</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.1</div>
+            <div class="card-value" style="font-size:16px">Задержание</div>
+            <div class="card-desc">Вред при задержании</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.2</div>
+            <div class="card-value" style="font-size:16px">Крайняя необходимость</div>
+            <div class="card-desc">Устранение опасности</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.3</div>
+            <div class="card-value" style="font-size:16px">Обоснованный риск</div>
+            <div class="card-desc">Для общественно полезной цели</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.4</div>
+            <div class="card-value" style="font-size:16px">Исполнение приказа</div>
+            <div class="card-desc">По закону</div>
+        </div>
+        <div class="card">
+            <div class="card-label">Статья 4.5</div>
+            <div class="card-value" style="font-size:16px">Принуждение</div>
+            <div class="card-desc">Физическое или психическое</div>
+        </div>
+    </div>
+</div>
+
+</div><!-- /content -->
+</main><!-- /main -->
+
+<footer class="footer">
+    <div>Составлено на основе: Уголовно-Административного кодекса, Процессуального кодекса штата New York</div>
+    <div style="margin-top:6px;color:var(--text-muted);font-size:10px;">Majestic RP &#8212; New York &#8212; 2026 &#8212; Created by Egor Mortez</div>
+    <div class="donate-box" style="max-width:400px;margin:24px auto 0;">
+        <div class="donate-label">&#9733; Поддержать проект &#9733;</div>
+        <div class="donate-text">Если памятка была полезна, можете поддержать переводом по лицевому счёту</div>
+        <div class="donate-number">325164</div>
+    </div>
+</footer>
+
+<script>
+    const introOverlay = document.getElementById('introOverlay');
+    if (introOverlay) { setTimeout(() => { if (introOverlay.parentNode) introOverlay.parentNode.removeChild(introOverlay); }, 4200); }
+
+    // HEADER PROGRESS BAR
+    const headerProgress = document.createElement('div');
+    headerProgress.className = 'header-progress';
+    document.querySelector('.header').appendChild(headerProgress);
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        headerProgress.style.width = progress + '%';
+    }, { passive: true });
+
+    // SCROLL OBSERVER
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) { entry.target.classList.add('animate-in'); sectionObserver.unobserve(entry.target); }
+        });
+    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.section').forEach(s => sectionObserver.observe(s));
+
+    // ACTIVE LINK OBSERVER
+    let currentObserver = null;
+    function initObserver() {
+        if (currentObserver) currentObserver.disconnect();
+        const visibleSections = Array.from(document.querySelectorAll('.section')).filter(el => {
+            if (el.classList.contains('lawyer-only') && document.body.classList.contains('lawyer-mode')) return true;
+            if (el.classList.contains('lawyer-only') || el.classList.contains('prosecutor-only')) return false;
+            return true;
+        });
+        currentObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.sidebar-link').forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-80px 0px -70% 0px' });
+        visibleSections.forEach(s => currentObserver.observe(s));
+    }
+    initObserver();
+
+    // SIDEBAR COLLAPSIBLE
+    document.querySelectorAll('.sidebar-group-toggle').forEach(toggle => {
+        toggle.addEventListener('click', () => toggle.closest('.sidebar-group').classList.toggle('collapsed'));
+    });
+
+    // BACK TO TOP
+    const backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '&#9650;';
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.body.appendChild(backToTop);
+    window.addEventListener('scroll', () => backToTop.classList.toggle('visible', window.scrollY > 400), { passive: true });
+
+    // SMOOTH SCROLL
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // SEARCH
+    const searchInput = document.getElementById('searchInput');
+    const searchNav = document.getElementById('searchNav');
+    const searchCount = document.getElementById('searchCount');
+    const searchPrev = document.getElementById('searchPrev');
+    const searchNext = document.getElementById('searchNext');
+    const searchClose = document.getElementById('searchClose');
+    const headerSearch = document.getElementById('headerSearch');
+    const content = document.querySelector('.content');
+    let highlights = [], currentIndex = -1;
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); searchInput.focus(); searchInput.select(); }
+        if (e.key === 'Escape') { clearSearch(); searchInput.blur(); }
+        if (highlights.length > 0 && e.key === 'Enter') { e.preventDefault(); navigateSearch(e.shiftKey ? -1 : 1); }
+    });
+
+    let debounceTimer;
+    searchInput.addEventListener('input', () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => performSearch(searchInput.value), 150); });
+    searchPrev.addEventListener('click', () => navigateSearch(-1));
+    searchNext.addEventListener('click', () => navigateSearch(1));
+    searchClose.addEventListener('click', () => { clearSearch(); searchInput.blur(); });
+
+    function clearSearch() {
+        clearHighlights(); clearDimming(); highlights = []; currentIndex = -1;
+        searchNav.classList.remove('visible'); headerSearch.classList.remove('has-results');
+        searchInput.value = ''; searchCount.textContent = '0 / 0';
+    }
+    function clearHighlights() {
+        content.querySelectorAll('mark.search-highlight, mark.search-current').forEach(mark => {
+            mark.parentNode.replaceChild(document.createTextNode(mark.textContent), mark); mark.parentNode.normalize();
+        });
+    }
+    function clearDimming() {
+        content.querySelectorAll('.search-dim').forEach(el => el.classList.remove('search-dim'));
+        content.querySelectorAll('.search-section-match').forEach(el => el.classList.remove('search-section-match'));
+    }
+    function escapeRegex(str) { return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+    function performSearch(query) {
+        clearHighlights(); clearDimming(); highlights = []; currentIndex = -1;
+        if (!query || query.trim().length < 2) {
+            searchNav.classList.remove('visible'); headerSearch.classList.remove('has-results');
+            searchCount.textContent = '0 / 0'; return;
+        }
+        const term = query.trim().toLowerCase();
+        const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');
+        const searchables = Array.from(content.querySelectorAll('.section, details, .card, .scenario, .alert, .miranda'));
+        let hasAny = false;
+        searchables.forEach(el => { if (el.textContent.toLowerCase().includes(term)) hasAny = true; });
+        if (!hasAny) {
+            searchNav.classList.remove('visible'); headerSearch.classList.remove('has-results');
+            searchCount.textContent = '0 / 0';
+            searchables.forEach(el => el.classList.add('search-dim')); return;
+        }
+        searchables.forEach(el => {
+            if (!el.textContent.toLowerCase().includes(term)) { el.classList.add('search-dim'); }
+            else { if (el.classList.contains('section') || el.tagName === 'DETAILS') el.classList.add('search-section-match'); highlightText(el, regex); }
+        });
+        highlights = Array.from(content.querySelectorAll('mark.search-highlight'));
+        if (highlights.length > 0) {
+            currentIndex = 0; updateCurrentHighlight(); updateCount();
+            searchNav.classList.add('visible'); headerSearch.classList.add('has-results');
+            highlights[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    function highlightText(element, regex) {
+        const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, {
+            acceptNode: (node) => {
+                if (node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'STYLE' || node.parentElement.tagName === 'MARK') return NodeFilter.FILTER_REJECT;
+                return regex.test(node.textContent) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            }
+        });
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        textNodes.forEach(node => {
+            const span = document.createElement('span');
+            span.innerHTML = node.textContent.replace(regex, '<mark class="search-highlight">$1</mark>');
+            node.parentNode.replaceChild(span, node);
+            span.querySelectorAll('mark.search-highlight').forEach(mark => highlights.push(mark));
+            while (span.childNodes.length > 0) span.parentNode.insertBefore(span.childNodes[0], span);
+            span.parentNode.removeChild(span);
+        });
+    }
+
+    function navigateSearch(direction) {
+        if (highlights.length === 0) return;
+        currentIndex = (currentIndex + direction + highlights.length) % highlights.length;
+        updateCurrentHighlight(); updateCount();
+        highlights[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const parentDetails = highlights[currentIndex].closest('details');
+        if (parentDetails && !parentDetails.open) parentDetails.open = true;
+    }
+    function updateCurrentHighlight() {
+        highlights.forEach((h, i) => { h.className = i === currentIndex ? 'search-current' : 'search-highlight'; });
+    }
+    function updateCount() { searchCount.textContent = `${currentIndex + 1} / ${highlights.length}`; }
+</script>
+</body>
+</html>
