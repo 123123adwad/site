@@ -1,0 +1,251 @@
+/* ===== JUDICIAL INTRO - BEAUTIFUL BACKGROUND ANIMATION ===== */
+.judicial-intro {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: #050608;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: judicialFadeOut 0.8s ease 5.5s forwards;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Animated background layers */
+.judicial-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse at 20% 80%, rgba(230,168,23,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.04) 0%, transparent 60%);
+    animation: bgPulse 4s ease-in-out infinite;
+}
+
+.judicial-intro::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse at 30% 30%, rgba(230,168,23,0.05) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 70%, rgba(230,168,23,0.03) 0%, transparent 40%);
+    animation: bgDrift 8s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+@keyframes bgDrift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-20px, 20px); }
+}
+
+/* Floating golden particles */
+.particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(230,168,23,0.6);
+    border-radius: 50%;
+    animation: floatUp 6s linear infinite;
+    box-shadow: 0 0 6px rgba(230,168,23,0.3);
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 7s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 1.2s; animation-duration: 5.5s; width: 2px; height: 2px; }
+.particle:nth-child(3) { left: 30%; animation-delay: 2.4s; animation-duration: 6.5s; }
+.particle:nth-child(4) { left: 40%; animation-delay: 0.8s; animation-duration: 7.5s; width: 4px; height: 4px; }
+.particle:nth-child(5) { left: 50%; animation-delay: 3.1s; animation-duration: 6s; }
+.particle:nth-child(6) { left: 60%; animation-delay: 1.6s; animation-duration: 8s; width: 2px; height: 2px; }
+.particle:nth-child(7) { left: 70%; animation-delay: 2.8s; animation-duration: 5.8s; }
+.particle:nth-child(8) { left: 80%; animation-delay: 0.4s; animation-duration: 7.2s; width: 4px; height: 4px; }
+.particle:nth-child(9) { left: 90%; animation-delay: 3.5s; animation-duration: 6.2s; width: 2px; height: 2px; }
+.particle:nth-child(10) { left: 15%; animation-delay: 4.1s; animation-duration: 7.8s; }
+.particle:nth-child(11) { left: 45%; animation-delay: 1.9s; animation-duration: 5.2s; width: 2px; height: 2px; }
+.particle:nth-child(12) { left: 75%; animation-delay: 3.7s; animation-duration: 6.8s; }
+
+@keyframes floatUp {
+    0% { bottom: -10px; opacity: 0; transform: translateX(0); }
+    10% { opacity: 1; }
+    90% { opacity: 0.6; }
+    100% { bottom: 110%; opacity: 0; transform: translateX(30px); }
+}
+
+/* Glowing orb effect */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    z-index: 0;
+}
+
+.orb-1 {
+    width: 300px; height: 300px;
+    background: rgba(230,168,23,0.08);
+    top: 20%; left: 15%;
+    animation: orbFloat1 10s ease-in-out infinite;
+}
+
+.orb-2 {
+    width: 250px; height: 250px;
+    background: rgba(59,130,246,0.06);
+    top: 60%; right: 10%;
+    animation: orbFloat2 12s ease-in-out infinite;
+}
+
+.orb-3 {
+    width: 200px; height: 200px;
+    background: rgba(139,92,246,0.05);
+    bottom: 10%; left: 40%;
+    animation: orbFloat3 9s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -30px); }
+}
+
+@keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-25px, 20px); }
+}
+
+@keyframes orbFloat3 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 15px); }
+}
+
+/* Expanding golden ring */
+.ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(230,168,23,0.3);
+    z-index: 1;
+}
+
+.ring-1 {
+    animation: ringExpand1 4s ease-out infinite;
+}
+
+.ring-2 {
+    animation: ringExpand2 4s ease-out 1s infinite;
+}
+
+.ring-3 {
+    animation: ringExpand3 4s ease-out 2s infinite;
+}
+
+@keyframes ringExpand1 {
+    0% { width: 50px; height: 50px; opacity: 0.8; border-width: 2px; }
+    100% { width: 400px; height: 400px; opacity: 0; border-width: 0.5px; }
+}
+
+@keyframes ringExpand2 {
+    0% { width: 50px; height: 50px; opacity: 0.6; border-width: 2px; }
+    100% { width: 350px; height: 350px; opacity: 0; border-width: 0.5px; }
+}
+
+@keyframes ringExpand3 {
+    0% { width: 50px; height: 50px; opacity: 0.4; border-width: 2px; }
+    100% { width: 300px; height: 300px; opacity: 0; border-width: 0.5px; }
+}
+
+/* GOVERNMENT title */
+.judicial-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 22px;
+    text-transform: uppercase;
+    color: #e6a817;
+    opacity: 0;
+    animation: titleReveal 1.2s ease 2.5s forwards;
+    text-shadow: 0 0 60px rgba(230,168,23,0.4), 0 0 120px rgba(230,168,23,0.2);
+    margin-bottom: 10px;
+    z-index: 3;
+}
+
+@keyframes titleReveal {
+    0% { opacity: 0; transform: translateY(25px) scale(0.9); filter: blur(6px); }
+    40% { opacity: 1; transform: translateY(0) scale(1.03); filter: blur(0); }
+    70% { transform: translateY(0) scale(0.99); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Subtitle */
+.judicial-subtitle {
+    font-family: var(--font-sans, 'Inter', sans-serif);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    color: #94a3b8;
+    opacity: 0;
+    animation: subtitleReveal 0.9s ease 3.5s forwards;
+    z-index: 3;
+}
+
+@keyframes subtitleReveal {
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Divider line */
+.judicial-divider {
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e6a817, transparent);
+    margin: 28px 0;
+    opacity: 0;
+    animation: dividerGrow 0.8s ease 3.2s forwards;
+    z-index: 3;
+}
+
+@keyframes dividerGrow {
+    0% { width: 0; opacity: 0; }
+    100% { width: 140px; opacity: 0.8; }
+}
+
+/* Credit */
+.judicial-credit {
+    position: absolute;
+    bottom: 40px;
+    font-family: var(--font-sans, 'Inter', sans-serif);
+    font-size: 10.5px;
+    letter-spacing: 3px;
+    color: #64748b;
+    opacity: 0;
+    animation: creditFade 0.8s ease 4.2s forwards;
+    z-index: 3;
+}
+
+.judicial-credit strong {
+    color: #e6a817;
+    font-weight: 600;
+}
+
+@keyframes creditFade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Fade out entire intro */
+@keyframes judicialFadeOut {
+    0% { opacity: 1; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
+}
